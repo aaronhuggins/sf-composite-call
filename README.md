@@ -59,3 +59,7 @@ The entire options object can be omitted when creating a new instance of `Compos
 |**collateSubrequests**|*Boolean*|**Optional.** Used in the request to Salesforce. See their [documentation](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/requests_composite.htm)|
 |**version**|*String*|**Optional** Sets the version of the Salesforce API to use for the Composite Call; defaults to `v48.0`.|
 |**jsforceConnection**|*JSforce instance*|**Optional.** This connection enables the `execute()` method for convenience. Without it, the result of Composite Call will have to be passed to another method to post it to Salesforce.|
+
+
+## Documentation
+The API is fully documented [internally](./docs/API.md)
