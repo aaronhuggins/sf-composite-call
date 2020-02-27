@@ -1,6 +1,6 @@
 {
   "name": "sf-composite-call",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Support for making Salesforce composite call requests with integration for JSforce.",
   "scripts": {
     "test": "gulp test",
@@ -9,6 +9,12 @@
     "prepack": "gulp compile",
     "postpack": "gulp clean"
   },
+  "keywords": [
+    "jsforce",
+    "salesforce",
+    "composite",
+    "api"
+  ],
   "author": "Aaron Huggins",
   "license": "MIT",
   "main": "dist/index.js",
