@@ -7,6 +7,8 @@
 <dd></dd>
 <dt><a href="#CompositeSubrequestQuery">CompositeSubrequestQuery</a> ⇐ <code><a href="#CompositeSubrequest">CompositeSubrequest</a></code></dt>
 <dd></dd>
+<dt><a href="#CompositeSubrequestSObject">CompositeSubrequestSObject</a> ⇐ <code><a href="#CompositeSubrequest">CompositeSubrequest</a></code></dt>
+<dd></dd>
 </dl>
 
 <a name="CompositeCall"></a>
@@ -19,7 +21,7 @@
     * [.url](#CompositeCall+url)
     * [.request](#CompositeCall+request)
     * [.addQuery(query, [referenceId], [version])](#CompositeCall+addQuery) ⇒ [<code>CompositeSubrequestQuery</code>](#CompositeSubrequestQuery)
-    * [.addSObject(sobject, [referenceId], [version])](#CompositeCall+addSObject) ⇒ <code>CompositeSubrequestSObject</code>
+    * [.addSObject(sobject, [referenceId], [version])](#CompositeCall+addSObject) ⇒ [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)
     * [.addSObjectCollection([referenceId], [version])](#CompositeCall+addSObjectCollection) ⇒ <code>CompositeSubrequestSObjectCollection</code>
     * [.execute()](#CompositeCall+execute) ⇒ <code>Promise.&lt;any&gt;</code>
 
@@ -83,11 +85,11 @@
 
 <a name="CompositeCall+addSObject"></a>
 
-### compositeCall.addSObject(sobject, [referenceId], [version]) ⇒ <code>CompositeSubrequestSObject</code>
+### compositeCall.addSObject(sobject, [referenceId], [version]) ⇒ [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)
 <p>Add a SObject subrequest instance to the composite request.</p>
 
 **Kind**: instance method of [<code>CompositeCall</code>](#CompositeCall)  
-**Returns**: <code>CompositeSubrequestSObject</code> - <ul>
+**Returns**: [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject) - <ul>
 <li>An instance of <code>CompositeSubrequestSObject</code>.</li>
 </ul>  
 **Throws**:
@@ -240,7 +242,7 @@
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [queryId] | <code>string</code> | <p><strong>Optional.</strong> The word <code>explain</code> or the <code>nextRecordsUrl</code> od a query.</p> |
+| [queryId] | <code>string</code> | <p><strong>Optional.</strong> The word <code>explain</code> or the <code>nextRecordsUrl</code> of a query.</p> |
 | [httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
 
 <a name="CompositeSubrequestQuery+explain"></a>
@@ -335,6 +337,159 @@
 <p>Base method for building the request.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestQuery</code>](#CompositeSubrequestQuery)  
+**Overrides**: [<code>makeRequest</code>](#CompositeSubrequest+makeRequest)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| method | <code>string</code> | <p>The method to use with the requested resource. Possible values are POST, PUT, PATCH, GET, and DELETE (case-sensitive).</p> |
+| url | <code>string</code> | <p>The resource to request.</p> |
+| body | <code>any</code> | <p><strong>Optional.</strong> The input body for the subrequest.</p> |
+| httpHeaders | <code>object</code> | <p><strong>Optional.</strong> Request headers and their values to include with the subrequest.</p> |
+
+<a name="CompositeSubrequestSObject"></a>
+
+## CompositeSubrequestSObject ⇐ [<code>CompositeSubrequest</code>](#CompositeSubrequest)
+**Kind**: global class  
+**Extends**: [<code>CompositeSubrequest</code>](#CompositeSubrequest)  
+
+* [CompositeSubrequestSObject](#CompositeSubrequestSObject) ⇐ [<code>CompositeSubrequest</code>](#CompositeSubrequest)
+    * [new CompositeSubrequestSObject(sobject, [referenceId], [version])](#new_CompositeSubrequestSObject_new)
+    * [.subrequest](#CompositeSubrequest+subrequest)
+    * [.destroy(id, [httpHeaders])](#CompositeSubrequestSObject+destroy) ⇒ <code>CompositeSubrequestObject</code>
+    * [.describe([httpHeaders])](#CompositeSubrequestSObject+describe) ⇒ <code>CompositeSubrequestObject</code>
+    * [.retrieve(id, [httpHeaders])](#CompositeSubrequestSObject+retrieve) ⇒ <code>CompositeSubrequestObject</code>
+    * [.update(record, [httpHeaders])](#CompositeSubrequestSObject+update) ⇒ <code>CompositeSubrequestObject</code>
+    * [.create(record, [httpHeaders])](#CompositeSubrequestSObject+create) ⇒ <code>CompositeSubrequestObject</code>
+    * [.insert(record, [httpHeaders])](#CompositeSubrequestSObject+insert) ⇒ <code>CompositeSubrequestObject</code>
+    * [.makeRequest(method, url, body, httpHeaders)](#CompositeSubrequest+makeRequest) ⇒ <code>CompositeSubrequestObject</code>
+
+<a name="new_CompositeSubrequestSObject_new"></a>
+
+### new CompositeSubrequestSObject(sobject, [referenceId], [version])
+<p>Class for SObject Composite Subrequests.</p>
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| sobject | <code>string</code> | <p>A valid built-in or custom SObject name.</p> |
+| [referenceId] | <code>string</code> | <p>The reference ID of the query subrequest.</p> |
+| [version] | <code>string</code> | <p>The version of the Salesforce API to use.</p> |
+
+<a name="CompositeSubrequest+subrequest"></a>
+
+### compositeSubrequestSObject.subrequest
+**Kind**: instance property of [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)  
+**Overrides**: [<code>subrequest</code>](#CompositeSubrequest+subrequest)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| subrequest | <code>object</code> | <p>The result of constructing the composite call.</p> |
+| [subrequest.body] | <code>any</code> | <p><strong>Optional.</strong> The input body for the subrequest.</p> |
+| [subrequest.httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Request headers and their values to include with the subrequest.</p> |
+| subrequest.method | <code>string</code> | <p>The method to use with the requested resource. Possible values are POST, PUT, PATCH, GET, and DELETE (case-sensitive).</p> |
+| subrequest.referenceId | <code>string</code> | <p>Reference ID that maps to the subrequest’s response and can be used to reference the response in later subrequests.</p> |
+| subrequest.url | <code>string</code> | <p>The resource to request.</p> |
+
+<a name="CompositeSubrequestSObject+destroy"></a>
+
+### compositeSubrequestSObject.destroy(id, [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+<p>Method to delete an SObject record.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| id | <code>string</code> | <p>The ID of the SObject resource to destory.</p> |
+| [httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
+
+<a name="CompositeSubrequestSObject+describe"></a>
+
+### compositeSubrequestSObject.describe([httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+<p>Method to describe an SObject type.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
+
+<a name="CompositeSubrequestSObject+retrieve"></a>
+
+### compositeSubrequestSObject.retrieve(id, [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+<p>Method to retrieve an SObject record.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| id | <code>string</code> | <p>The ID of the SObject resource to retrieve.</p> |
+| [httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
+
+<a name="CompositeSubrequestSObject+update"></a>
+
+### compositeSubrequestSObject.update(record, [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+<p>Method to update an SObject record.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| record | <code>object</code> | <p>An object with valid fields for the SObject record.</p> |
+| record.Id | <code>string</code> | <p>The ID of the SObject resource to update.</p> |
+| [httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
+
+<a name="CompositeSubrequestSObject+create"></a>
+
+### compositeSubrequestSObject.create(record, [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+<p>Method to create an SObject record.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| record | <code>object</code> | <p>An object with valid fields for the SObject record; do not include an Id field.</p> |
+| [httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
+
+<a name="CompositeSubrequestSObject+insert"></a>
+
+### compositeSubrequestSObject.insert(record, [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+<p>Synonym of <code>create()</code>.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| record | <code>object</code> | <p>An object with valid fields for the SObject record; do not include an Id field.</p> |
+| [httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
+
+<a name="CompositeSubrequest+makeRequest"></a>
+
+### compositeSubrequestSObject.makeRequest(method, url, body, httpHeaders) ⇒ <code>CompositeSubrequestObject</code>
+<p>Base method for building the request.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)  
 **Overrides**: [<code>makeRequest</code>](#CompositeSubrequest+makeRequest)  
 **Returns**: <code>CompositeSubrequestObject</code> - <ul>
 <li>A subrequest object.</li>
