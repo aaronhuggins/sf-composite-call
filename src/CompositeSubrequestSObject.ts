@@ -16,7 +16,7 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
   delete (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestObject {
     this.obj = this.makeRequest(
       'DELETE',
-      !isNullOrUndefined(operation) ? this.url() + '/' + operation : operation,
+      !isNullOrUndefined(operation) ? this.url() + '/' + operation : this.url(),
       body,
       httpHeaders
     )
@@ -31,7 +31,7 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
   get (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestObject {
     this.obj = this.makeRequest(
       null,
-      !isNullOrUndefined(operation) ? this.url() + '/' + operation : operation,
+      !isNullOrUndefined(operation) ? this.url() + '/' + operation : this.url(),
       body,
       httpHeaders
     )
@@ -50,7 +50,7 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
   patch (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestObject {
     this.obj = this.makeRequest(
       'PATCH',
-      !isNullOrUndefined(operation) ? this.url() + '/' + operation : operation,
+      !isNullOrUndefined(operation) ? this.url() + '/' + operation : this.url(),
       body,
       httpHeaders
     )
@@ -69,7 +69,7 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
   post (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestObject {
     this.obj = this.makeRequest(
       'POST',
-      !isNullOrUndefined(operation) ? this.url() + '/' + operation : operation,
+      !isNullOrUndefined(operation) ? this.url() + '/' + operation : this.url(),
       body,
       httpHeaders
     )
@@ -88,7 +88,7 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
   put (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestObject {
     this.obj = this.makeRequest(
       'PUT',
-      !isNullOrUndefined(operation) ? this.url() + '/' + operation : operation,
+      !isNullOrUndefined(operation) ? this.url() + '/' + operation : this.url(),
       body,
       httpHeaders
     )

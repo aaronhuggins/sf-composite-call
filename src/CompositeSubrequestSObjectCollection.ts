@@ -91,7 +91,7 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
   post (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestObject {
     this.obj = this.makeRequest(
       'POST',
-      !isNullOrUndefined(operation) ? this.url() + '/' + operation : operation,
+      !isNullOrUndefined(operation) ? this.url() + '/' + operation : this.url(),
       body,
       httpHeaders
     )
