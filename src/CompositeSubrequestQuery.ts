@@ -32,7 +32,7 @@ export class CompositeSubrequestQuery extends CompositeSubrequest {
 
   /**
    * @description Base request method for query operations.
-   * @param {string} [queryId] - **Optional.** The word `explain` or the `nextRecordsUrl` od a query.
+   * @param {string} [queryId] - **Optional.** The word `explain` or the `nextRecordsUrl` of a query.
    * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
    * @returns {CompositeSubrequestObject} - A subrequest object.
    */
