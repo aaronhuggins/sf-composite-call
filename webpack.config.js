@@ -1,13 +1,9 @@
-const DtsBundleWebpack = require('dts-bundle-webpack')
-const pkg = require('./package.json')
-
 module.exports = {
   mode: 'production',
   entry: './index.ts',
   output: {
-    libraryTarget: 'commonjs',
     filename: 'index.js',
-    path: __dirname
+    path: __dirname + '/dist/web'
   },
   resolve: {
     extensions: ['.ts']
@@ -17,16 +13,8 @@ module.exports = {
       { test: /\.tsx?$/, loader: 'ts-loader' }
     ]
   },
-  target: 'node',
+  target: 'web',
   optimization: {
-    minimize: false
-  },
-  plugins: [
-    new DtsBundleWebpack({
-      name: pkg.name,
-      baseDir: './',
-      main: 'dist/index.d.ts',
-      out: 'index.d.ts'
-    })
-  ]
+    minimize: true
+  }
 }

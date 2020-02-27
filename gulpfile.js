@@ -26,6 +26,7 @@ gulp.task('clean', gulp.parallel(
 ))
 
 gulp.task('compile', shell.task([
+  'tsc',
   'webpack'
 ]))
 
