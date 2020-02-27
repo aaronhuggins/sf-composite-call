@@ -171,7 +171,9 @@
 <p>Base method for building the request.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequest</code>](#CompositeSubrequest)  
-**Returns**: <code>CompositeSubrequestObject</code> - <p>A subrequest object.</p>  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -189,6 +191,13 @@
 * [CompositeSubrequestQuery](#CompositeSubrequestQuery) ⇐ [<code>CompositeSubrequest</code>](#CompositeSubrequest)
     * [new CompositeSubrequestQuery(query, [referenceId], [version])](#new_CompositeSubrequestQuery_new)
     * [.subrequest](#CompositeSubrequest+subrequest)
+    * [.get([queryId], [httpHeaders])](#CompositeSubrequestQuery+get) ⇒ <code>CompositeSubrequestObject</code>
+    * [.explain([httpHeaders])](#CompositeSubrequestQuery+explain) ⇒ <code>CompositeSubrequestObject</code>
+    * [.explainAll([httpHeaders])](#CompositeSubrequestQuery+explainAll) ⇒ <code>CompositeSubrequestObject</code>
+    * [.nextRecords(nextRecordsUrl, [httpHeaders])](#CompositeSubrequestQuery+nextRecords) ⇒ <code>CompositeSubrequestObject</code>
+    * [.nextRecordsAll(nextRecordsUrl, [httpHeaders])](#CompositeSubrequestQuery+nextRecordsAll) ⇒ <code>CompositeSubrequestObject</code>
+    * [.query([httpHeaders])](#CompositeSubrequestQuery+query) ⇒ <code>CompositeSubrequestObject</code>
+    * [.queryAll([httpHeaders])](#CompositeSubrequestQuery+queryAll) ⇒ <code>CompositeSubrequestObject</code>
     * [.makeRequest(method, url, body, httpHeaders)](#CompositeSubrequest+makeRequest) ⇒ <code>CompositeSubrequestObject</code>
 
 <a name="new_CompositeSubrequestQuery_new"></a>
@@ -219,6 +228,107 @@
 | subrequest.referenceId | <code>string</code> | <p>Reference ID that maps to the subrequest’s response and can be used to reference the response in later subrequests.</p> |
 | subrequest.url | <code>string</code> | <p>The resource to request.</p> |
 
+<a name="CompositeSubrequestQuery+get"></a>
+
+### compositeSubrequestQuery.get([queryId], [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+<p>Base request method for query operations.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestQuery</code>](#CompositeSubrequestQuery)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [queryId] | <code>string</code> | <p><strong>Optional.</strong> The word <code>explain</code> or the <code>nextRecordsUrl</code> od a query.</p> |
+| [httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
+
+<a name="CompositeSubrequestQuery+explain"></a>
+
+### compositeSubrequestQuery.explain([httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+<p>Method for creating an <code>explain</code> operation.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestQuery</code>](#CompositeSubrequestQuery)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
+
+<a name="CompositeSubrequestQuery+explainAll"></a>
+
+### compositeSubrequestQuery.explainAll([httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+<p>Method for creating an <code>explain</code> operation with queryAll.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestQuery</code>](#CompositeSubrequestQuery)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
+
+<a name="CompositeSubrequestQuery+nextRecords"></a>
+
+### compositeSubrequestQuery.nextRecords(nextRecordsUrl, [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+<p>Method for creating an operation to obtain next records.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestQuery</code>](#CompositeSubrequestQuery)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| nextRecordsUrl | <code>string</code> | <p>The <code>nextRecordsUrl</code> of a query.</p> |
+| [httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
+
+<a name="CompositeSubrequestQuery+nextRecordsAll"></a>
+
+### compositeSubrequestQuery.nextRecordsAll(nextRecordsUrl, [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+<p>Method for creating an operation to obtain next records with queryAll.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestQuery</code>](#CompositeSubrequestQuery)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| nextRecordsUrl | <code>string</code> | <p>The <code>nextRecordsUrl</code> of a query.</p> |
+| [httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
+
+<a name="CompositeSubrequestQuery+query"></a>
+
+### compositeSubrequestQuery.query([httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+<p>Method for creating a <code>query</code> operation.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestQuery</code>](#CompositeSubrequestQuery)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
+
+<a name="CompositeSubrequestQuery+queryAll"></a>
+
+### compositeSubrequestQuery.queryAll([httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+<p>Method for creating a <code>query</code> operation with queryAll.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestQuery</code>](#CompositeSubrequestQuery)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
+
 <a name="CompositeSubrequest+makeRequest"></a>
 
 ### compositeSubrequestQuery.makeRequest(method, url, body, httpHeaders) ⇒ <code>CompositeSubrequestObject</code>
@@ -226,7 +336,9 @@
 
 **Kind**: instance method of [<code>CompositeSubrequestQuery</code>](#CompositeSubrequestQuery)  
 **Overrides**: [<code>makeRequest</code>](#CompositeSubrequest+makeRequest)  
-**Returns**: <code>CompositeSubrequestObject</code> - <p>A subrequest object.</p>  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
 
 | Param | Type | Description |
 | --- | --- | --- |

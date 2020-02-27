@@ -30,6 +30,12 @@ export class CompositeSubrequestQuery extends CompositeSubrequest {
     return this.obj
   }
 
+  /**
+   * @description Base request method for query operations.
+   * @param {string} [queryId] - **Optional.** The word `explain` or the `nextRecordsUrl` od a query.
+   * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
+   * @returns {CompositeSubrequestObject} - A subrequest object.
+   */
   get (queryId?: string, httpHeaders?: any): CompositeSubrequestObject {
     const soql = this.soql.replace(/\s/gu, '+')
 
@@ -47,36 +53,68 @@ export class CompositeSubrequestQuery extends CompositeSubrequest {
     return this.obj
   }
 
+  /**
+   * @description Method for creating an `explain` operation.
+   * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
+   * @returns {CompositeSubrequestObject} - A subrequest object.
+   */
   explain (httpHeaders?: any): CompositeSubrequestObject {
     this.verb = 'query'
 
     return this.get('explain', httpHeaders)
   }
 
+  /**
+   * @description Method for creating an `explain` operation with queryAll.
+   * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
+   * @returns {CompositeSubrequestObject} - A subrequest object.
+   */
   explainAll (httpHeaders?: any): CompositeSubrequestObject {
     this.verb = 'queryAll'
 
     return this.get('explain', httpHeaders)
   }
 
+  /**
+   * @description Method for creating an operation to obtain next records.
+   * @param {string} nextRecordsUrl - The `nextRecordsUrl` of a query.
+   * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
+   * @returns {CompositeSubrequestObject} - A subrequest object.
+   */
   nextRecords (nextRecordsUrl: string, httpHeaders?: any): CompositeSubrequestObject {
     this.verb = 'query'
 
     return this.get(nextRecordsUrl, httpHeaders)
   }
 
+  /**
+   * @description Method for creating an operation to obtain next records with queryAll.
+   * @param {string} nextRecordsUrl - The `nextRecordsUrl` of a query.
+   * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
+   * @returns {CompositeSubrequestObject} - A subrequest object.
+   */
   nextRecordsAll (nextRecordsUrl: string, httpHeaders?: any): CompositeSubrequestObject {
     this.verb = 'queryAll'
 
     return this.get(nextRecordsUrl, httpHeaders)
   }
 
+  /**
+   * @description Method for creating a `query` operation.
+   * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
+   * @returns {CompositeSubrequestObject} - A subrequest object.
+   */
   query (httpHeaders?: any): CompositeSubrequestObject {
     this.verb = 'query'
 
     return this.get(null, httpHeaders)
   }
 
+  /**
+   * @description Method for creating a `query` operation with queryAll.
+   * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
+   * @returns {CompositeSubrequestObject} - A subrequest object.
+   */
   queryAll (httpHeaders?: any): CompositeSubrequestObject {
     this.verb = 'queryAll'
 
