@@ -9,6 +9,8 @@
 <dd></dd>
 <dt><a href="#CompositeSubrequestSObject">CompositeSubrequestSObject</a> ⇐ <code><a href="#CompositeSubrequest">CompositeSubrequest</a></code></dt>
 <dd></dd>
+<dt><a href="#CompositeSubrequestSObjectCollection">CompositeSubrequestSObjectCollection</a> ⇐ <code><a href="#CompositeSubrequest">CompositeSubrequest</a></code></dt>
+<dd></dd>
 </dl>
 
 <a name="CompositeCall"></a>
@@ -22,7 +24,7 @@
     * [.request](#CompositeCall+request)
     * [.addQuery(query, [referenceId], [version])](#CompositeCall+addQuery) ⇒ [<code>CompositeSubrequestQuery</code>](#CompositeSubrequestQuery)
     * [.addSObject(sobject, [referenceId], [version])](#CompositeCall+addSObject) ⇒ [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)
-    * [.addSObjectCollection([referenceId], [version])](#CompositeCall+addSObjectCollection) ⇒ <code>CompositeSubrequestSObjectCollection</code>
+    * [.addSObjectCollection([referenceId], [version])](#CompositeCall+addSObjectCollection) ⇒ [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection)
     * [.execute()](#CompositeCall+execute) ⇒ <code>Promise.&lt;any&gt;</code>
 
 <a name="new_CompositeCall_new"></a>
@@ -105,11 +107,11 @@
 
 <a name="CompositeCall+addSObjectCollection"></a>
 
-### compositeCall.addSObjectCollection([referenceId], [version]) ⇒ <code>CompositeSubrequestSObjectCollection</code>
+### compositeCall.addSObjectCollection([referenceId], [version]) ⇒ [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection)
 <p>Add a SObject Collection subrequest instance to the composite request.</p>
 
 **Kind**: instance method of [<code>CompositeCall</code>](#CompositeCall)  
-**Returns**: <code>CompositeSubrequestSObjectCollection</code> - <ul>
+**Returns**: [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection) - <ul>
 <li>An instance of <code>CompositeSubrequestSObjectCollection</code>.</li>
 </ul>  
 **Throws**:
@@ -491,6 +493,215 @@
 
 **Kind**: instance method of [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)  
 **Overrides**: [<code>makeRequest</code>](#CompositeSubrequest+makeRequest)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| method | <code>string</code> | <p>The method to use with the requested resource. Possible values are POST, PUT, PATCH, GET, and DELETE (case-sensitive).</p> |
+| url | <code>string</code> | <p>The resource to request.</p> |
+| body | <code>any</code> | <p><strong>Optional.</strong> The input body for the subrequest.</p> |
+| httpHeaders | <code>object</code> | <p><strong>Optional.</strong> Request headers and their values to include with the subrequest.</p> |
+
+<a name="CompositeSubrequestSObjectCollection"></a>
+
+## CompositeSubrequestSObjectCollection ⇐ [<code>CompositeSubrequest</code>](#CompositeSubrequest)
+**Kind**: global class  
+**Extends**: [<code>CompositeSubrequest</code>](#CompositeSubrequest)  
+
+* [CompositeSubrequestSObjectCollection](#CompositeSubrequestSObjectCollection) ⇐ [<code>CompositeSubrequest</code>](#CompositeSubrequest)
+    * [new CompositeSubrequestSObjectCollection([referenceId], [version])](#new_CompositeSubrequestSObjectCollection_new)
+    * [.subrequest](#CompositeSubrequest+subrequest)
+    * [.delete(ids, [allOrNone], [httpHeaders])](#CompositeSubrequestSObjectCollection+delete) ⇒ <code>CompositeSubrequestObject</code>
+    * [.destroy(id, [allOrNone], [httpHeaders])](#CompositeSubrequestSObjectCollection+destroy) ⇒ <code>CompositeSubrequestObject</code>
+    * [.get(sobject, ids, fields, [httpHeaders])](#CompositeSubrequestSObjectCollection+get) ⇒ <code>CompositeSubrequestObject</code>
+    * [.update(record, [sobject], [allOrNone], [httpHeaders])](#CompositeSubrequestSObjectCollection+update) ⇒ <code>CompositeSubrequestObject</code>
+    * [.retrieve(sobject, id, field, [httpHeaders])](#CompositeSubrequestSObjectCollection+retrieve) ⇒ <code>CompositeSubrequestObject</code>
+    * [.create(record, [sobject], [allOrNone], [httpHeaders])](#CompositeSubrequestSObjectCollection+create) ⇒ <code>CompositeSubrequestObject</code>
+    * [.insert(record, [sobject], [allOrNone], [httpHeaders])](#CompositeSubrequestSObjectCollection+insert) ⇒ <code>CompositeSubrequestObject</code>
+    * [.makeRequest(method, url, body, httpHeaders)](#CompositeSubrequest+makeRequest) ⇒ <code>CompositeSubrequestObject</code>
+
+<a name="new_CompositeSubrequestSObjectCollection_new"></a>
+
+### new CompositeSubrequestSObjectCollection([referenceId], [version])
+<p>Class for SObject Collection Composite Subrequests.</p>
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [referenceId] | <code>string</code> | <p>The reference ID of the query subrequest.</p> |
+| [version] | <code>string</code> | <p>The version of the Salesforce API to use.</p> |
+
+<a name="CompositeSubrequest+subrequest"></a>
+
+### compositeSubrequestSObjectCollection.subrequest
+**Kind**: instance property of [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| subrequest | <code>object</code> | <p>The result of constructing the composite call.</p> |
+| [subrequest.body] | <code>any</code> | <p><strong>Optional.</strong> The input body for the subrequest.</p> |
+| [subrequest.httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Request headers and their values to include with the subrequest.</p> |
+| subrequest.method | <code>string</code> | <p>The method to use with the requested resource. Possible values are POST, PUT, PATCH, GET, and DELETE (case-sensitive).</p> |
+| subrequest.referenceId | <code>string</code> | <p>Reference ID that maps to the subrequest’s response and can be used to reference the response in later subrequests.</p> |
+| subrequest.url | <code>string</code> | <p>The resource to request.</p> |
+
+<a name="CompositeSubrequestSObjectCollection+delete"></a>
+
+### compositeSubrequestSObjectCollection.delete(ids, [allOrNone], [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+<p>Method to delete a collection of SObjects.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+**Throws**:
+
+- <code>Error</code> <p>Too many IDs specified for SObject Collection DELETE request; limit is 200, ${ids.length} were provided.</p>
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| ids | <code>Array.&lt;string&gt;</code> |  | <p>An array of IDs to delete; limit is 200 records.</p> |
+| [allOrNone] | <code>boolean</code> | <code>false</code> | <p><strong>Optional.</strong> Indicates whether to roll back the entire request when the deletion of any object fails (true) or to continue with the independent deletion of other objects in the request. The default is false.</p> |
+| [httpHeaders] | <code>object</code> |  | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
+
+<a name="CompositeSubrequestSObjectCollection+destroy"></a>
+
+### compositeSubrequestSObjectCollection.destroy(id, [allOrNone], [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+<p>Method to delete a collection of SObjects.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+**Throws**:
+
+- <code>Error</code> <p>Too many IDs specified for SObject Collection DELETE request; limit is 200, ${ids.length} were provided.</p>
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| id | <code>string</code> \| <code>Array.&lt;string&gt;</code> |  | <p>A single ID or an array of IDs to delete; limit is 200 records.</p> |
+| [allOrNone] | <code>boolean</code> | <code>false</code> | <p><strong>Optional.</strong> Indicates whether to roll back the entire request when the deletion of any object fails (true) or to continue with the independent deletion of other objects in the request. The default is false.</p> |
+| [httpHeaders] | <code>object</code> |  | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
+
+<a name="CompositeSubrequestSObjectCollection+get"></a>
+
+### compositeSubrequestSObjectCollection.get(sobject, ids, fields, [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+<p>Method to get a collection of SObjects.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+**Throws**:
+
+- <code>Error</code> <p>Too many IDs specified for SObject Collection GET request; limit is 800, ${ids.length} were provided.</p>
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| sobject | <code>string</code> | <p>Name of the sobject(s) to get.</p> |
+| ids | <code>Array.&lt;string&gt;</code> | <p>A single ID or an array of IDs to get; limit is 800 records.</p> |
+| fields | <code>Array.&lt;string&gt;</code> | <p>The field names to retrieve for each sobject.</p> |
+| [httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
+
+<a name="CompositeSubrequestSObjectCollection+update"></a>
+
+### compositeSubrequestSObjectCollection.update(record, [sobject], [allOrNone], [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+<p>Method to update a collection of SObjects.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+**Throws**:
+
+- <code>Error</code> <p>Too many records specified for PATCH request; limit is 200, ${records.length} were provided.</p>
+- <code>Error</code> <p>No SObject type provided for PATCH request.</p>
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| record | <code>object</code> \| <code>Array.&lt;object&gt;</code> | <p>The SObject records to update, limit is 200; ensure that all records have an Id field and object <code>attributes</code> with field <code>type</code> containing the SOBject name of the record.</p> |
+| [sobject] | <code>string</code> | <p><strong>Optional, if all records have a type.</strong> A SObject name; used to add type information to any records missing <code>attributes.type</code>.</p> |
+| [allOrNone] | <code>boolean</code> | <p><strong>Optional.</strong> Indicates whether to roll back the entire request when the deletion of any object fails (true) or to continue with the independent deletion of other objects in the request. The default is false.</p> |
+| [httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
+
+<a name="CompositeSubrequestSObjectCollection+retrieve"></a>
+
+### compositeSubrequestSObjectCollection.retrieve(sobject, id, field, [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+<p>Method to get a collection of SObjects.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+**Throws**:
+
+- <code>Error</code> <p>Too many IDs specified for SObject Collection retrieve request; limit is 2000, ${id.length} were provided.</p>
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| sobject | <code>string</code> | <p>Name of the sobject(s) to get.</p> |
+| id | <code>string</code> \| <code>Array.&lt;string&gt;</code> | <p>A single ID or an array of IDs to get; limit is 2000 records.</p> |
+| field | <code>string</code> \| <code>Array.&lt;string&gt;</code> | <p>The field name(s) to retrieve for each sobject.</p> |
+| [httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
+
+<a name="CompositeSubrequestSObjectCollection+create"></a>
+
+### compositeSubrequestSObjectCollection.create(record, [sobject], [allOrNone], [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+<p>Method to create a collection of SObjects.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+**Throws**:
+
+- <code>Error</code> <p>Too many records specified for create request; limit is 200, ${records.length} were provided.</p>
+- <code>Error</code> <p>No SObject type provided for PATCH request.</p>
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| record | <code>object</code> \| <code>Array.&lt;object&gt;</code> | <p>The SObject records to create, limit is 200; ensure that each record has object <code>attributes</code> with field <code>type</code> containing the SOBject name of the record and <strong>NO</strong> records have an Id field.</p> |
+| [sobject] | <code>string</code> | <p><strong>Optional, if all records have a type.</strong> A SObject name; used to add type information to any records missing <code>attributes.type</code>.</p> |
+| [allOrNone] | <code>boolean</code> | <p><strong>Optional.</strong> Indicates whether to roll back the entire request when the deletion of any object fails (true) or to continue with the independent deletion of other objects in the request. The default is false.</p> |
+| [httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
+
+<a name="CompositeSubrequestSObjectCollection+insert"></a>
+
+### compositeSubrequestSObjectCollection.insert(record, [sobject], [allOrNone], [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+<p>Synonym of <code>create()</code>.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection)  
+**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+<li>A subrequest object.</li>
+</ul>  
+**Throws**:
+
+- <code>Error</code> <p>Too many records specified for create request; limit is 200, ${records.length} were provided.</p>
+- <code>Error</code> <p>No SObject type provided for PATCH request.</p>
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| record | <code>object</code> \| <code>Array.&lt;object&gt;</code> | <p>The SObject records to create, limit is 200; ensure that each record has object <code>attributes</code> with field <code>type</code> containing the SOBject name of the record and <strong>NO</strong> records have an Id field.</p> |
+| [sobject] | <code>string</code> | <p><strong>Optional, if all records have a type.</strong> A SObject name; used to add type information to any records missing <code>attributes.type</code>.</p> |
+| [allOrNone] | <code>boolean</code> | <p><strong>Optional.</strong> Indicates whether to roll back the entire request when the deletion of any object fails (true) or to continue with the independent deletion of other objects in the request. The default is false.</p> |
+| [httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
+
+<a name="CompositeSubrequest+makeRequest"></a>
+
+### compositeSubrequestSObjectCollection.makeRequest(method, url, body, httpHeaders) ⇒ <code>CompositeSubrequestObject</code>
+<p>Base method for building the request.</p>
+
+**Kind**: instance method of [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection)  
 **Returns**: <code>CompositeSubrequestObject</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
