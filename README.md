@@ -62,4 +62,4 @@ The entire options object can be omitted when creating a new instance of `Compos
 
 
 ## Documentation
-The API is fully documented [internally](./docs/API.md)
+The API is fully documented [internally](/docs/API.md)
