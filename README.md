@@ -1,5 +1,5 @@
 # Salesforce Composite Call
-A library for dealing the the Composiate Call API in Salesforce. Integrates with the JSforce node module when available and passed as an option.
+A library for dealing the the Composite Call API in Salesforce. Integrates with the JSforce node module when available and passed as an option.
 
 ## Usage
 Install it from the [npm repository](https://www.npmjs.com/package/sf-composite-call):
@@ -62,4 +62,4 @@ The entire options object can be omitted when creating a new instance of `Compos
 
 
 ## Documentation
-The API is fully documented [internally](/docs/API.md)
+The API is fully documented [internally](/docs/API.md). Raw methods are available in most cases in the event that things like the url or the body of the message need to be manipulated further, or some operation is supported by Salesforce that is not directly implemented by this library.
