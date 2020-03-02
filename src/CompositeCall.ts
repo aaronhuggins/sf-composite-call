@@ -60,6 +60,42 @@ export class CompositeCall {
     totalCount: number
   }
 
+  get versionRX (): RegExp {
+    return /v\d\d\.\d/gu
+  }
+
+  /**
+   * @property {string} url - The versioned url of the composite request.
+   */
+
+  get url (): string {
+    return `/services/data/${this.version}/composite`
+  }
+
+  /**
+   * @property {object} request - The result of constructing the composite call.
+   * @property {boolean} [request.allOrNone] - **Optional.** Specifies what to do when an error occurs while processing a subrequest.
+   * @property {boolean} [request.collateSubrequests] - **Optional.** Specifies what to do when an error occurs while processing a subrequest.
+   * @property {object[]} request.CompositeSubrequest - Collection of subrequests to execute.
+   */
+
+  get request (): CompositeCallObject {
+    const compositeRequest = this.calls.map(val => val.subrequest)
+
+    return {
+      compositeRequest,
+      ...this.options
+    }
+  }
+
+  get queryLimitMet (): boolean {
+    return this.limits.queryCount === this.limits.query
+  }
+
+  get totalLimitMet (): boolean {
+    return this.limits.totalCount === this.limits.total
+  }
+
   /**
    * @description Add a query subrequest instance to the composite request.
    * @param {string} query - A SOQL query.
@@ -137,41 +173,5 @@ export class CompositeCall {
     } else {
       return this.connection.requestPost(this.url, this.request)
     }
-  }
-
-  get versionRX (): RegExp {
-    return /v\d\d\.\d/gu
-  }
-
-  /**
-   * @property {string} url - The versioned url of the composite request.
-   */
-
-  get url (): string {
-    return `/services/data/${this.version}/composite`
-  }
-
-  /**
-   * @property {object} request - The result of constructing the composite call.
-   * @property {boolean} [request.allOrNone] - **Optional.** Specifies what to do when an error occurs while processing a subrequest.
-   * @property {boolean} [request.collateSubrequests] - **Optional.** Specifies what to do when an error occurs while processing a subrequest.
-   * @property {object[]} request.CompositeSubrequest - Collection of subrequests to execute.
-   */
-
-  get request (): CompositeCallObject {
-    const compositeRequest = this.calls.map(val => val.subrequest)
-
-    return {
-      compositeRequest,
-      ...this.options
-    }
-  }
-
-  get queryLimitMet (): boolean {
-    return this.limits.queryCount === this.limits.query
-  }
-
-  get totalLimitMet (): boolean {
-    return this.limits.totalCount === this.limits.total
   }
 }
