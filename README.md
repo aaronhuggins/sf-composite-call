@@ -1,5 +1,5 @@
 # Salesforce Composite Call
-A library for dealing the the Composite Call API in Salesforce. Integrates with the JSforce node module when available and passed as an option.
+A library for dealing with the Composite Call API in Salesforce. Integrates with the JSforce node module when available and passed as an option.
 
 ## Usage
 Install it from the [npm repository](https://www.npmjs.com/package/sf-composite-call):
@@ -50,6 +50,8 @@ Then import it in your project:
 import { CompositeCall } from './sf-composite-call/index.ts'
 ```
 
+JSforce is not a required module. This library can be used to simply build out the requests so that another JavaScript API can make the actual POST operation using `fetch()` or `request` or whatever framework makes you happy.
+
 ## Options
 The entire options object can be omitted when creating a new instance of `CompositeCall`.
 
@@ -63,3 +65,5 @@ The entire options object can be omitted when creating a new instance of `Compos
 
 ## Documentation
 The API is fully documented [internally](/docs/API.md). Raw methods are available in most cases in the event that things like the url or the body of the message need to be manipulated further, or some operation is supported by Salesforce that is not directly implemented by this library.
+
+Further documentation of Salesforce Composite Calls can be found at [their site](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_composite_composite.htm). As much effort as possible has been taken to make this an implementation of their JSON request/response API in JavaScript.

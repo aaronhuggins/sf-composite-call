@@ -71,6 +71,6 @@ export interface CompositeSubrequestBody {
   referenceId: string
   body?: string | object | any
   httpHeaders?: {
-    [property: string]: string
+    [header: string]: string
   }
 }

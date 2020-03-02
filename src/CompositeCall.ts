@@ -2,6 +2,7 @@ import { isNullOrUndefined } from './Helpers'
 import { CompositeSubrequestQuery } from './CompositeSubrequestQuery'
 import { CompositeSubrequestSObject } from './CompositeSubrequestSObject'
 import { CompositeSubrequestSObjectCollection } from './CompositeSubrequestSObjectCollection'
+import { CompositeSubrequestBody } from './CompositeSubrequest'
 
 interface CompositeCallOptions {
   version?: string
@@ -10,10 +11,35 @@ interface CompositeCallOptions {
   jsforceConnection?: any
 }
 
-interface CompositeCallObject {
+// Taken from https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/requests_composite.htm
+interface CompositeCallRequest {
   allOrNone?: boolean
   collateSubrequests?: boolean
-  compositeRequest: any[]
+  compositeRequest: CompositeSubrequestBody[]
+}
+
+interface CompositeCallResponseError {
+  message: string
+  errorCode: string
+  fields: string[]
+}
+
+interface CompositeCallResponseResult {
+  id: string
+  success: boolean
+  errors: any[]
+}
+
+// Taken from https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/responses_composite.htm
+interface CompositeCallResponse {
+  compositeResponse: Array<{
+    body?: CompositeCallResponseResult | CompositeCallResponseResult[] | CompositeCallResponseError[]
+    httpHeaders: {
+      [header: string]: string
+    }
+    httpStatusCode: number
+    referenceId: string
+  }>
 }
 
 /**
@@ -79,7 +105,7 @@ export class CompositeCall {
    * @property {object[]} request.CompositeSubrequest - Collection of subrequests to execute.
    */
 
-  get request (): CompositeCallObject {
+  get request (): CompositeCallRequest {
     const compositeRequest = this.calls.map(val => val.subrequest)
 
     return {
@@ -165,9 +191,9 @@ export class CompositeCall {
 
   /**
    * @description Convenience method for integrating with JSforce.
-   * @returns {Promise<any>} - The result of executing the composite call, or undefined if no JSforce connection option was given.
+   * @returns {Promise<void | CompositeCallResponse>} - The result of executing the composite call, or undefined if no JSforce connection option was given.
    */
-  async execute (): Promise<any> { // eslint-disable-line @typescript-eslint/require-await
+  async execute (): Promise<void | CompositeCallResponse> { // eslint-disable-line @typescript-eslint/require-await
     if (isNullOrUndefined(this.connection)) {
       return console.warn('No JSForce Connection object provided. Request cannot be executed.')
     } else {

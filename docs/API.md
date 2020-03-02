@@ -25,7 +25,7 @@
     * [.addQuery(query, [referenceId], [version])](#CompositeCall+addQuery) ⇒ [<code>CompositeSubrequestQuery</code>](#CompositeSubrequestQuery)
     * [.addSObject(sobject, [referenceId], [version])](#CompositeCall+addSObject) ⇒ [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)
     * [.addSObjectCollection([referenceId], [version])](#CompositeCall+addSObjectCollection) ⇒ [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection)
-    * [.execute()](#CompositeCall+execute) ⇒ <code>Promise.&lt;any&gt;</code>
+    * [.execute()](#CompositeCall+execute) ⇒ <code>Promise.&lt;(void\|CompositeCallResponse)&gt;</code>
 
 <a name="new_CompositeCall_new"></a>
 
@@ -126,11 +126,11 @@
 
 <a name="CompositeCall+execute"></a>
 
-### compositeCall.execute() ⇒ <code>Promise.&lt;any&gt;</code>
+### compositeCall.execute() ⇒ <code>Promise.&lt;(void\|CompositeCallResponse)&gt;</code>
 <p>Convenience method for integrating with JSforce.</p>
 
 **Kind**: instance method of [<code>CompositeCall</code>](#CompositeCall)  
-**Returns**: <code>Promise.&lt;any&gt;</code> - <ul>
+**Returns**: <code>Promise.&lt;(void\|CompositeCallResponse)&gt;</code> - <ul>
 <li>The result of executing the composite call, or undefined if no JSforce connection option was given.</li>
 </ul>  
 <a name="CompositeSubrequest"></a>
