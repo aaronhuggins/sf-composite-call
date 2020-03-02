@@ -141,7 +141,7 @@
 * [CompositeSubrequest](#CompositeSubrequest)
     * [new CompositeSubrequest([referenceId], [version])](#new_CompositeSubrequest_new)
     * [.subrequest](#CompositeSubrequest+subrequest)
-    * [.makeRequest(method, url, body, httpHeaders)](#CompositeSubrequest+makeRequest) ⇒ <code>CompositeSubrequestObject</code>
+    * [.makeRequest(method, url, body, httpHeaders)](#CompositeSubrequest+makeRequest) ⇒ <code>CompositeSubrequestBody</code>
 
 <a name="new_CompositeSubrequest_new"></a>
 
@@ -171,11 +171,11 @@
 
 <a name="CompositeSubrequest+makeRequest"></a>
 
-### compositeSubrequest.makeRequest(method, url, body, httpHeaders) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequest.makeRequest(method, url, body, httpHeaders) ⇒ <code>CompositeSubrequestBody</code>
 <p>Base method for building the request.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequest</code>](#CompositeSubrequest)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 
@@ -195,14 +195,14 @@
 * [CompositeSubrequestQuery](#CompositeSubrequestQuery) ⇐ [<code>CompositeSubrequest</code>](#CompositeSubrequest)
     * [new CompositeSubrequestQuery(query, [referenceId], [version])](#new_CompositeSubrequestQuery_new)
     * [.subrequest](#CompositeSubrequest+subrequest)
-    * [.get([queryId], [httpHeaders])](#CompositeSubrequestQuery+get) ⇒ <code>CompositeSubrequestObject</code>
-    * [.explain([httpHeaders])](#CompositeSubrequestQuery+explain) ⇒ <code>CompositeSubrequestObject</code>
-    * [.explainAll([httpHeaders])](#CompositeSubrequestQuery+explainAll) ⇒ <code>CompositeSubrequestObject</code>
-    * [.nextRecords(nextRecordsUrl, [httpHeaders])](#CompositeSubrequestQuery+nextRecords) ⇒ <code>CompositeSubrequestObject</code>
-    * [.nextRecordsAll(nextRecordsUrl, [httpHeaders])](#CompositeSubrequestQuery+nextRecordsAll) ⇒ <code>CompositeSubrequestObject</code>
-    * [.query([httpHeaders])](#CompositeSubrequestQuery+query) ⇒ <code>CompositeSubrequestObject</code>
-    * [.queryAll([httpHeaders])](#CompositeSubrequestQuery+queryAll) ⇒ <code>CompositeSubrequestObject</code>
-    * [.makeRequest(method, url, body, httpHeaders)](#CompositeSubrequest+makeRequest) ⇒ <code>CompositeSubrequestObject</code>
+    * [.get([queryId], [httpHeaders])](#CompositeSubrequestQuery+get) ⇒ <code>CompositeSubrequestBody</code>
+    * [.explain([httpHeaders])](#CompositeSubrequestQuery+explain) ⇒ <code>CompositeSubrequestBody</code>
+    * [.explainAll([httpHeaders])](#CompositeSubrequestQuery+explainAll) ⇒ <code>CompositeSubrequestBody</code>
+    * [.nextRecords(nextRecordsUrl, [httpHeaders])](#CompositeSubrequestQuery+nextRecords) ⇒ <code>CompositeSubrequestBody</code>
+    * [.nextRecordsAll(nextRecordsUrl, [httpHeaders])](#CompositeSubrequestQuery+nextRecordsAll) ⇒ <code>CompositeSubrequestBody</code>
+    * [.query([httpHeaders])](#CompositeSubrequestQuery+query) ⇒ <code>CompositeSubrequestBody</code>
+    * [.queryAll([httpHeaders])](#CompositeSubrequestQuery+queryAll) ⇒ <code>CompositeSubrequestBody</code>
+    * [.makeRequest(method, url, body, httpHeaders)](#CompositeSubrequest+makeRequest) ⇒ <code>CompositeSubrequestBody</code>
 
 <a name="new_CompositeSubrequestQuery_new"></a>
 
@@ -234,11 +234,11 @@
 
 <a name="CompositeSubrequestQuery+get"></a>
 
-### compositeSubrequestQuery.get([queryId], [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestQuery.get([queryId], [httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
 <p>Base request method for query operations.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestQuery</code>](#CompositeSubrequestQuery)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 
@@ -249,11 +249,11 @@
 
 <a name="CompositeSubrequestQuery+explain"></a>
 
-### compositeSubrequestQuery.explain([httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestQuery.explain([httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
 <p>Method for creating an <code>explain</code> operation.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestQuery</code>](#CompositeSubrequestQuery)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 
@@ -263,11 +263,11 @@
 
 <a name="CompositeSubrequestQuery+explainAll"></a>
 
-### compositeSubrequestQuery.explainAll([httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestQuery.explainAll([httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
 <p>Method for creating an <code>explain</code> operation with queryAll.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestQuery</code>](#CompositeSubrequestQuery)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 
@@ -277,11 +277,11 @@
 
 <a name="CompositeSubrequestQuery+nextRecords"></a>
 
-### compositeSubrequestQuery.nextRecords(nextRecordsUrl, [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestQuery.nextRecords(nextRecordsUrl, [httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
 <p>Method for creating an operation to obtain next records.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestQuery</code>](#CompositeSubrequestQuery)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 
@@ -292,11 +292,11 @@
 
 <a name="CompositeSubrequestQuery+nextRecordsAll"></a>
 
-### compositeSubrequestQuery.nextRecordsAll(nextRecordsUrl, [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestQuery.nextRecordsAll(nextRecordsUrl, [httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
 <p>Method for creating an operation to obtain next records with queryAll.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestQuery</code>](#CompositeSubrequestQuery)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 
@@ -307,11 +307,11 @@
 
 <a name="CompositeSubrequestQuery+query"></a>
 
-### compositeSubrequestQuery.query([httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestQuery.query([httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
 <p>Method for creating a <code>query</code> operation.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestQuery</code>](#CompositeSubrequestQuery)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 
@@ -321,11 +321,11 @@
 
 <a name="CompositeSubrequestQuery+queryAll"></a>
 
-### compositeSubrequestQuery.queryAll([httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestQuery.queryAll([httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
 <p>Method for creating a <code>query</code> operation with queryAll.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestQuery</code>](#CompositeSubrequestQuery)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 
@@ -335,12 +335,12 @@
 
 <a name="CompositeSubrequest+makeRequest"></a>
 
-### compositeSubrequestQuery.makeRequest(method, url, body, httpHeaders) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestQuery.makeRequest(method, url, body, httpHeaders) ⇒ <code>CompositeSubrequestBody</code>
 <p>Base method for building the request.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestQuery</code>](#CompositeSubrequestQuery)  
 **Overrides**: [<code>makeRequest</code>](#CompositeSubrequest+makeRequest)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 
@@ -360,13 +360,13 @@
 * [CompositeSubrequestSObject](#CompositeSubrequestSObject) ⇐ [<code>CompositeSubrequest</code>](#CompositeSubrequest)
     * [new CompositeSubrequestSObject(sobject, [referenceId], [version])](#new_CompositeSubrequestSObject_new)
     * [.subrequest](#CompositeSubrequest+subrequest)
-    * [.destroy(id, [httpHeaders])](#CompositeSubrequestSObject+destroy) ⇒ <code>CompositeSubrequestObject</code>
-    * [.describe([httpHeaders])](#CompositeSubrequestSObject+describe) ⇒ <code>CompositeSubrequestObject</code>
-    * [.retrieve(id, [httpHeaders])](#CompositeSubrequestSObject+retrieve) ⇒ <code>CompositeSubrequestObject</code>
-    * [.update(record, [httpHeaders])](#CompositeSubrequestSObject+update) ⇒ <code>CompositeSubrequestObject</code>
-    * [.create(record, [httpHeaders])](#CompositeSubrequestSObject+create) ⇒ <code>CompositeSubrequestObject</code>
-    * [.insert(record, [httpHeaders])](#CompositeSubrequestSObject+insert) ⇒ <code>CompositeSubrequestObject</code>
-    * [.makeRequest(method, url, body, httpHeaders)](#CompositeSubrequest+makeRequest) ⇒ <code>CompositeSubrequestObject</code>
+    * [.destroy(id, [httpHeaders])](#CompositeSubrequestSObject+destroy) ⇒ <code>CompositeSubrequestBody</code>
+    * [.describe([httpHeaders])](#CompositeSubrequestSObject+describe) ⇒ <code>CompositeSubrequestBody</code>
+    * [.retrieve(id, [httpHeaders])](#CompositeSubrequestSObject+retrieve) ⇒ <code>CompositeSubrequestBody</code>
+    * [.update(record, [httpHeaders])](#CompositeSubrequestSObject+update) ⇒ <code>CompositeSubrequestBody</code>
+    * [.create(record, [httpHeaders])](#CompositeSubrequestSObject+create) ⇒ <code>CompositeSubrequestBody</code>
+    * [.insert(record, [httpHeaders])](#CompositeSubrequestSObject+insert) ⇒ <code>CompositeSubrequestBody</code>
+    * [.makeRequest(method, url, body, httpHeaders)](#CompositeSubrequest+makeRequest) ⇒ <code>CompositeSubrequestBody</code>
 
 <a name="new_CompositeSubrequestSObject_new"></a>
 
@@ -398,11 +398,11 @@
 
 <a name="CompositeSubrequestSObject+destroy"></a>
 
-### compositeSubrequestSObject.destroy(id, [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestSObject.destroy(id, [httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
 <p>Method to delete an SObject record.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 
@@ -413,11 +413,11 @@
 
 <a name="CompositeSubrequestSObject+describe"></a>
 
-### compositeSubrequestSObject.describe([httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestSObject.describe([httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
 <p>Method to describe an SObject type.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 
@@ -427,11 +427,11 @@
 
 <a name="CompositeSubrequestSObject+retrieve"></a>
 
-### compositeSubrequestSObject.retrieve(id, [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestSObject.retrieve(id, [httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
 <p>Method to retrieve an SObject record.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 
@@ -442,11 +442,11 @@
 
 <a name="CompositeSubrequestSObject+update"></a>
 
-### compositeSubrequestSObject.update(record, [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestSObject.update(record, [httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
 <p>Method to update an SObject record.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 
@@ -458,11 +458,11 @@
 
 <a name="CompositeSubrequestSObject+create"></a>
 
-### compositeSubrequestSObject.create(record, [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestSObject.create(record, [httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
 <p>Method to create an SObject record.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 
@@ -473,11 +473,11 @@
 
 <a name="CompositeSubrequestSObject+insert"></a>
 
-### compositeSubrequestSObject.insert(record, [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestSObject.insert(record, [httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
 <p>Synonym of <code>create()</code>.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 
@@ -488,12 +488,12 @@
 
 <a name="CompositeSubrequest+makeRequest"></a>
 
-### compositeSubrequestSObject.makeRequest(method, url, body, httpHeaders) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestSObject.makeRequest(method, url, body, httpHeaders) ⇒ <code>CompositeSubrequestBody</code>
 <p>Base method for building the request.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)  
 **Overrides**: [<code>makeRequest</code>](#CompositeSubrequest+makeRequest)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 
@@ -513,14 +513,14 @@
 * [CompositeSubrequestSObjectCollection](#CompositeSubrequestSObjectCollection) ⇐ [<code>CompositeSubrequest</code>](#CompositeSubrequest)
     * [new CompositeSubrequestSObjectCollection([referenceId], [version])](#new_CompositeSubrequestSObjectCollection_new)
     * [.subrequest](#CompositeSubrequest+subrequest)
-    * [.delete(ids, [allOrNone], [httpHeaders])](#CompositeSubrequestSObjectCollection+delete) ⇒ <code>CompositeSubrequestObject</code>
-    * [.destroy(id, [allOrNone], [httpHeaders])](#CompositeSubrequestSObjectCollection+destroy) ⇒ <code>CompositeSubrequestObject</code>
-    * [.get(sobject, ids, fields, [httpHeaders])](#CompositeSubrequestSObjectCollection+get) ⇒ <code>CompositeSubrequestObject</code>
-    * [.update(record, [sobject], [allOrNone], [httpHeaders])](#CompositeSubrequestSObjectCollection+update) ⇒ <code>CompositeSubrequestObject</code>
-    * [.retrieve(sobject, id, field, [httpHeaders])](#CompositeSubrequestSObjectCollection+retrieve) ⇒ <code>CompositeSubrequestObject</code>
-    * [.create(record, [sobject], [allOrNone], [httpHeaders])](#CompositeSubrequestSObjectCollection+create) ⇒ <code>CompositeSubrequestObject</code>
-    * [.insert(record, [sobject], [allOrNone], [httpHeaders])](#CompositeSubrequestSObjectCollection+insert) ⇒ <code>CompositeSubrequestObject</code>
-    * [.makeRequest(method, url, body, httpHeaders)](#CompositeSubrequest+makeRequest) ⇒ <code>CompositeSubrequestObject</code>
+    * [.delete(ids, [allOrNone], [httpHeaders])](#CompositeSubrequestSObjectCollection+delete) ⇒ <code>CompositeSubrequestBody</code>
+    * [.destroy(id, [allOrNone], [httpHeaders])](#CompositeSubrequestSObjectCollection+destroy) ⇒ <code>CompositeSubrequestBody</code>
+    * [.get(sobject, ids, fields, [httpHeaders])](#CompositeSubrequestSObjectCollection+get) ⇒ <code>CompositeSubrequestBody</code>
+    * [.update(record, [sobject], [allOrNone], [httpHeaders])](#CompositeSubrequestSObjectCollection+update) ⇒ <code>CompositeSubrequestBody</code>
+    * [.retrieve(sobject, id, field, [httpHeaders])](#CompositeSubrequestSObjectCollection+retrieve) ⇒ <code>CompositeSubrequestBody</code>
+    * [.create(record, [sobject], [allOrNone], [httpHeaders])](#CompositeSubrequestSObjectCollection+create) ⇒ <code>CompositeSubrequestBody</code>
+    * [.insert(record, [sobject], [allOrNone], [httpHeaders])](#CompositeSubrequestSObjectCollection+insert) ⇒ <code>CompositeSubrequestBody</code>
+    * [.makeRequest(method, url, body, httpHeaders)](#CompositeSubrequest+makeRequest) ⇒ <code>CompositeSubrequestBody</code>
 
 <a name="new_CompositeSubrequestSObjectCollection_new"></a>
 
@@ -550,11 +550,11 @@
 
 <a name="CompositeSubrequestSObjectCollection+delete"></a>
 
-### compositeSubrequestSObjectCollection.delete(ids, [allOrNone], [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestSObjectCollection.delete(ids, [allOrNone], [httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
 <p>Method to delete a collection of SObjects.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 **Throws**:
@@ -570,11 +570,11 @@
 
 <a name="CompositeSubrequestSObjectCollection+destroy"></a>
 
-### compositeSubrequestSObjectCollection.destroy(id, [allOrNone], [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestSObjectCollection.destroy(id, [allOrNone], [httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
 <p>Method to delete a collection of SObjects.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 **Throws**:
@@ -590,11 +590,11 @@
 
 <a name="CompositeSubrequestSObjectCollection+get"></a>
 
-### compositeSubrequestSObjectCollection.get(sobject, ids, fields, [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestSObjectCollection.get(sobject, ids, fields, [httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
 <p>Method to get a collection of SObjects.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 **Throws**:
@@ -611,11 +611,11 @@
 
 <a name="CompositeSubrequestSObjectCollection+update"></a>
 
-### compositeSubrequestSObjectCollection.update(record, [sobject], [allOrNone], [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestSObjectCollection.update(record, [sobject], [allOrNone], [httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
 <p>Method to update a collection of SObjects.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 **Throws**:
@@ -633,11 +633,11 @@
 
 <a name="CompositeSubrequestSObjectCollection+retrieve"></a>
 
-### compositeSubrequestSObjectCollection.retrieve(sobject, id, field, [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestSObjectCollection.retrieve(sobject, id, field, [httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
 <p>Method to get a collection of SObjects.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 **Throws**:
@@ -654,11 +654,11 @@
 
 <a name="CompositeSubrequestSObjectCollection+create"></a>
 
-### compositeSubrequestSObjectCollection.create(record, [sobject], [allOrNone], [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestSObjectCollection.create(record, [sobject], [allOrNone], [httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
 <p>Method to create a collection of SObjects.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 **Throws**:
@@ -676,11 +676,11 @@
 
 <a name="CompositeSubrequestSObjectCollection+insert"></a>
 
-### compositeSubrequestSObjectCollection.insert(record, [sobject], [allOrNone], [httpHeaders]) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestSObjectCollection.insert(record, [sobject], [allOrNone], [httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
 <p>Synonym of <code>create()</code>.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 **Throws**:
@@ -698,11 +698,11 @@
 
 <a name="CompositeSubrequest+makeRequest"></a>
 
-### compositeSubrequestSObjectCollection.makeRequest(method, url, body, httpHeaders) ⇒ <code>CompositeSubrequestObject</code>
+### compositeSubrequestSObjectCollection.makeRequest(method, url, body, httpHeaders) ⇒ <code>CompositeSubrequestBody</code>
 <p>Base method for building the request.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection)  
-**Returns**: <code>CompositeSubrequestObject</code> - <ul>
+**Returns**: <code>CompositeSubrequestBody</code> - <ul>
 <li>A subrequest object.</li>
 </ul>  
 
