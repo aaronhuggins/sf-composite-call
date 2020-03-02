@@ -1,5 +1,5 @@
 import { isNullOrUndefined } from './Helpers'
-import { CompositeSubrequest, CompositeSubrequestObject } from './CompositeSubrequest'
+import { CompositeSubrequest, CompositeSubrequestBody } from './CompositeSubrequest'
 
 /**
  * @description Class for SObject Composite Subrequests.
@@ -20,7 +20,7 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
     return super.url() + `/sobjects/${this.sobject}`
   }
 
-  delete (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestObject {
+  delete (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestBody {
     this.obj = this.makeRequest(
       'DELETE',
       !isNullOrUndefined(operation) ? this.url() + '/' + operation : this.url(),
@@ -35,13 +35,13 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
    * @description Method to delete an SObject record.
    * @param {string} id - The ID of the SObject resource to destory.
    * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
-   * @returns {CompositeSubrequestObject} - A subrequest object.
+   * @returns {CompositeSubrequestBody} - A subrequest object.
    */
-  destroy (id: string, httpHeaders?: any): CompositeSubrequestObject {
+  destroy (id: string, httpHeaders?: any): CompositeSubrequestBody {
     return this.delete(undefined, id, httpHeaders)
   }
 
-  get (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestObject {
+  get (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestBody {
     this.obj = this.makeRequest(
       null,
       !isNullOrUndefined(operation) ? this.url() + '/' + operation : this.url(),
@@ -55,9 +55,9 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
   /**
    * @description Method to describe an SObject type.
    * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
-   * @returns {CompositeSubrequestObject} - A subrequest object.
+   * @returns {CompositeSubrequestBody} - A subrequest object.
    */
-  describe (httpHeaders?: any): CompositeSubrequestObject {
+  describe (httpHeaders?: any): CompositeSubrequestBody {
     return this.get(undefined, 'describe', httpHeaders)
   }
 
@@ -65,13 +65,13 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
    * @description Method to retrieve an SObject record.
    * @param {string} id - The ID of the SObject resource to retrieve.
    * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
-   * @returns {CompositeSubrequestObject} - A subrequest object.
+   * @returns {CompositeSubrequestBody} - A subrequest object.
    */
-  retrieve (id: string, httpHeaders?: any): CompositeSubrequestObject {
+  retrieve (id: string, httpHeaders?: any): CompositeSubrequestBody {
     return this.get(undefined, id, httpHeaders)
   }
 
-  patch (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestObject {
+  patch (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestBody {
     this.obj = this.makeRequest(
       'PATCH',
       !isNullOrUndefined(operation) ? this.url() + '/' + operation : this.url(),
@@ -87,9 +87,9 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
    * @param {object} record - An object with valid fields for the SObject record.
    * @param {string} record.Id - The ID of the SObject resource to update.
    * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
-   * @returns {CompositeSubrequestObject} - A subrequest object.
+   * @returns {CompositeSubrequestBody} - A subrequest object.
    */
-  update (record: any, httpHeaders?: any): CompositeSubrequestObject {
+  update (record: any, httpHeaders?: any): CompositeSubrequestBody {
     const id = record.Id
 
     delete record.Id
@@ -97,7 +97,7 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
     return this.patch(record, id, httpHeaders)
   }
 
-  post (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestObject {
+  post (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestBody {
     this.obj = this.makeRequest(
       'POST',
       !isNullOrUndefined(operation) ? this.url() + '/' + operation : this.url(),
@@ -112,9 +112,9 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
    * @description Method to create an SObject record.
    * @param {object} record - An object with valid fields for the SObject record; do not include an Id field.
    * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
-   * @returns {CompositeSubrequestObject} - A subrequest object.
+   * @returns {CompositeSubrequestBody} - A subrequest object.
    */
-  create (record: any, httpHeaders?: any): CompositeSubrequestObject {
+  create (record: any, httpHeaders?: any): CompositeSubrequestBody {
     return this.post(record, null, httpHeaders)
   }
 
@@ -122,13 +122,13 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
    * @description Synonym of `create()`.
    * @param {object} record - An object with valid fields for the SObject record; do not include an Id field.
    * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
-   * @returns {CompositeSubrequestObject} - A subrequest object.
+   * @returns {CompositeSubrequestBody} - A subrequest object.
    */
-  insert (record: any, httpHeaders?: any): CompositeSubrequestObject {
+  insert (record: any, httpHeaders?: any): CompositeSubrequestBody {
     return this.create(record, httpHeaders)
   }
 
-  put (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestObject {
+  put (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestBody {
     this.obj = this.makeRequest(
       'PUT',
       !isNullOrUndefined(operation) ? this.url() + '/' + operation : this.url(),

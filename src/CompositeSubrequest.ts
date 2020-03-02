@@ -14,7 +14,7 @@ export class CompositeSubrequest {
 
   version: string
   referenceId: string
-  obj: CompositeSubrequestObject
+  obj: CompositeSubrequestBody
 
   get versionRX (): RegExp {
     return /v\d\d\.\d/gu
@@ -29,7 +29,7 @@ export class CompositeSubrequest {
    * @property {string} subrequest.url - The resource to request.
    */
 
-  get subrequest (): CompositeSubrequestObject {
+  get subrequest (): CompositeSubrequestBody {
     if (isNullOrUndefined(this.obj)) {
       return this.makeRequest()
     }
@@ -47,9 +47,9 @@ export class CompositeSubrequest {
    * @param {string} url - The resource to request.
    * @param {any} body - **Optional.** The input body for the subrequest.
    * @param {object} httpHeaders - **Optional.** Request headers and their values to include with the subrequest.
-   * @returns {CompositeSubrequestObject} - A subrequest object.
+   * @returns {CompositeSubrequestBody} - A subrequest object.
    */
-  makeRequest (method?: CompositeSubrequestMethods, url?: string, body?: any, httpHeaders?: any): CompositeSubrequestObject {
+  makeRequest (method?: CompositeSubrequestMethods, url?: string, body?: any, httpHeaders?: any): CompositeSubrequestBody {
     method = isNullOrUndefined(method) ? 'GET' : method
     url = isNullOrUndefined(url) ? this.url() : url
 
@@ -65,10 +65,12 @@ export class CompositeSubrequest {
 
 type CompositeSubrequestMethods = 'DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT'
 
-export interface CompositeSubrequestObject {
-  method: string
+export interface CompositeSubrequestBody {
+  method: CompositeSubrequestMethods
   url: string
   referenceId: string
-  body?: any
-  httpHeaders?: any
+  body?: string | object | any
+  httpHeaders?: {
+    [property: string]: string
+  }
 }

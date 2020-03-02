@@ -1,5 +1,5 @@
 import { isNullOrUndefined } from './Helpers'
-import { CompositeSubrequest, CompositeSubrequestObject } from './CompositeSubrequest'
+import { CompositeSubrequest, CompositeSubrequestBody } from './CompositeSubrequest'
 
 /**
  * @description Class for SObject Collection Composite Subrequests.
@@ -17,10 +17,10 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
    * @param {string[]} ids - An array of IDs to delete; limit is 200 records.
    * @param {boolean} [allOrNone=false] - **Optional.** Indicates whether to roll back the entire request when the deletion of any object fails (true) or to continue with the independent deletion of other objects in the request. The default is false.
    * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
-   * @returns {CompositeSubrequestObject} - A subrequest object.
+   * @returns {CompositeSubrequestBody} - A subrequest object.
    * @throws {Error} Too many IDs specified for SObject Collection DELETE request; limit is 200, ${ids.length} were provided.
    */
-  delete (ids: string[], allOrNone: boolean = false, httpHeaders?: any): CompositeSubrequestObject {
+  delete (ids: string[], allOrNone: boolean = false, httpHeaders?: any): CompositeSubrequestBody {
     if (ids.length > 200) {
       throw new Error(`Too many IDs specified for SObject Collection DELETE request; limit is 200, ${ids.length} were provided.`)
     }
@@ -40,10 +40,10 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
    * @param {string | string[]} id - A single ID or an array of IDs to delete; limit is 200 records.
    * @param {boolean} [allOrNone=false] - **Optional.** Indicates whether to roll back the entire request when the deletion of any object fails (true) or to continue with the independent deletion of other objects in the request. The default is false.
    * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
-   * @returns {CompositeSubrequestObject} - A subrequest object.
+   * @returns {CompositeSubrequestBody} - A subrequest object.
    * @throws {Error} Too many IDs specified for SObject Collection DELETE request; limit is 200, ${ids.length} were provided.
    */
-  destroy (id: string | string[], allOrNone?: boolean, httpHeaders?: any): CompositeSubrequestObject {
+  destroy (id: string | string[], allOrNone?: boolean, httpHeaders?: any): CompositeSubrequestBody {
     const ids: string[] = Array.isArray(id) ? id : [id]
 
     return this.delete(ids, allOrNone, httpHeaders)
@@ -55,10 +55,10 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
    * @param {string[]} ids - A single ID or an array of IDs to get; limit is 800 records.
    * @param {string[]} fields - The field names to retrieve for each sobject.
    * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
-   * @returns {CompositeSubrequestObject} - A subrequest object.
+   * @returns {CompositeSubrequestBody} - A subrequest object.
    * @throws {Error} Too many IDs specified for SObject Collection GET request; limit is 800, ${ids.length} were provided.
    */
-  get (sobject: string, ids: string[], fields: string[], httpHeaders?: any): CompositeSubrequestObject {
+  get (sobject: string, ids: string[], fields: string[], httpHeaders?: any): CompositeSubrequestBody {
     if (ids.length > 800) {
       throw new Error(`Too many IDs specified for SObject Collection GET request; limit is 800, ${ids.length} were provided.`)
     }
@@ -73,7 +73,7 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
     return this.obj
   }
 
-  patch (records: any[], sobject?: string, allOrNone?: boolean, httpHeaders?: any): CompositeSubrequestObject {
+  patch (records: any[], sobject?: string, allOrNone?: boolean, httpHeaders?: any): CompositeSubrequestBody {
     if (records.length > 200) {
       throw new Error(`Too many records specified for PATCH request; limit is 200, ${records.length} were provided.`)
     }
@@ -119,17 +119,17 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
    * @param {string} [sobject] - **Optional, if all records have a type.** A SObject name; used to add type information to any records missing `attributes.type`.
    * @param {boolean} [allOrNone] - **Optional.** Indicates whether to roll back the entire request when the deletion of any object fails (true) or to continue with the independent deletion of other objects in the request. The default is false.
    * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
-   * @returns {CompositeSubrequestObject} - A subrequest object.
+   * @returns {CompositeSubrequestBody} - A subrequest object.
    * @throws {Error} Too many records specified for PATCH request; limit is 200, ${records.length} were provided.
    * @throws {Error} No SObject type provided for PATCH request.
    */
-  update (record: any | any[], sobject?: string, allOrNone?: boolean, httpHeaders?: any): CompositeSubrequestObject {
+  update (record: any | any[], sobject?: string, allOrNone?: boolean, httpHeaders?: any): CompositeSubrequestBody {
     const records: any[] = Array.isArray(record) ? record : [record]
 
     return this.patch(records, sobject, allOrNone, httpHeaders)
   }
 
-  post (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestObject {
+  post (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestBody {
     this.obj = this.makeRequest(
       'POST',
       !isNullOrUndefined(operation) ? this.url() + '/' + operation : this.url(),
@@ -146,10 +146,10 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
    * @param {string | string[]} id - A single ID or an array of IDs to get; limit is 2000 records.
    * @param {string | string[]} field - The field name(s) to retrieve for each sobject.
    * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
-   * @returns {CompositeSubrequestObject} - A subrequest object.
+   * @returns {CompositeSubrequestBody} - A subrequest object.
    * @throws {Error} Too many IDs specified for SObject Collection retrieve request; limit is 2000, ${id.length} were provided.
    */
-  retrieve (sobject: string, id: string | string[], field: string | string[], httpHeaders?: any): CompositeSubrequestObject {
+  retrieve (sobject: string, id: string | string[], field: string | string[], httpHeaders?: any): CompositeSubrequestBody {
     const ids: string[] = Array.isArray(id) ? id : [id]
     const fields: string[] = Array.isArray(field) ? field : [field]
     const body = {
@@ -170,11 +170,11 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
    * @param {string} [sobject] - **Optional, if all records have a type.** A SObject name; used to add type information to any records missing `attributes.type`.
    * @param {boolean} [allOrNone] - **Optional.** Indicates whether to roll back the entire request when the deletion of any object fails (true) or to continue with the independent deletion of other objects in the request. The default is false.
    * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
-   * @returns {CompositeSubrequestObject} - A subrequest object.
+   * @returns {CompositeSubrequestBody} - A subrequest object.
    * @throws {Error} Too many records specified for create request; limit is 200, ${records.length} were provided.
    * @throws {Error} No SObject type provided for PATCH request.
    */
-  create (record: any | any[], sobject?: string, allOrNone?: boolean, httpHeaders?: any): CompositeSubrequestObject {
+  create (record: any | any[], sobject?: string, allOrNone?: boolean, httpHeaders?: any): CompositeSubrequestBody {
     const records: any[] = Array.isArray(record) ? record : [record]
 
     if (records.length > 200) {
@@ -215,11 +215,11 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
    * @param {string} [sobject] - **Optional, if all records have a type.** A SObject name; used to add type information to any records missing `attributes.type`.
    * @param {boolean} [allOrNone] - **Optional.** Indicates whether to roll back the entire request when the deletion of any object fails (true) or to continue with the independent deletion of other objects in the request. The default is false.
    * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
-   * @returns {CompositeSubrequestObject} - A subrequest object.
+   * @returns {CompositeSubrequestBody} - A subrequest object.
    * @throws {Error} Too many records specified for create request; limit is 200, ${records.length} were provided.
    * @throws {Error} No SObject type provided for PATCH request.
    */
-  insert (record: any | any[], sobject?: string, allOrNone?: boolean, httpHeaders?: any): CompositeSubrequestObject {
+  insert (record: any | any[], sobject?: string, allOrNone?: boolean, httpHeaders?: any): CompositeSubrequestBody {
     return this.create(record, sobject, allOrNone, httpHeaders)
   }
 }
