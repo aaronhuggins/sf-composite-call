@@ -90,6 +90,7 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
    * @returns {CompositeSubrequestBody} - A subrequest object.
    */
   update (record: any, httpHeaders?: any): CompositeSubrequestBody {
+    record = Object.assign({}, record)
     const id = record.Id
 
     delete record.Id

@@ -78,6 +78,8 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
       throw new Error(`Too many records specified for PATCH request; limit is 200, ${records.length} were provided.`)
     }
 
+    records = records.map((_record) => Object.assign({}, _record))
+
     if (isNullOrUndefined(sobject)) {
       const sobjects: string[] = records
         .map((val: any) => !isNullOrUndefined(val.attributes) ? (val.attributes.type as string) : '')
@@ -175,11 +177,13 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
    * @throws {Error} No SObject type provided for PATCH request.
    */
   create (record: any | any[], sobject?: string, allOrNone?: boolean, httpHeaders?: any): CompositeSubrequestBody {
-    const records: any[] = Array.isArray(record) ? record : [record]
+    let records: any[] = Array.isArray(record) ? record : [record]
 
     if (records.length > 200) {
       throw new Error(`Too many records specified for create request; limit is 200, ${records.length} were provided.`)
     }
+
+    records = records.map((_record) => Object.assign({}, _record))
 
     if (isNullOrUndefined(sobject)) {
       const sobjects: string[] = records
