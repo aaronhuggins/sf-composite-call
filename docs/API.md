@@ -25,6 +25,7 @@
     * [.addQuery(query, [referenceId], [version])](#CompositeCall+addQuery) ⇒ [<code>CompositeSubrequestQuery</code>](#CompositeSubrequestQuery)
     * [.addSObject(sobject, [referenceId], [version])](#CompositeCall+addSObject) ⇒ [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)
     * [.addSObjectCollection([referenceId], [version])](#CompositeCall+addSObjectCollection) ⇒ [<code>CompositeSubrequestSObjectCollection</code>](#CompositeSubrequestSObjectCollection)
+    * [.clear()](#CompositeCall+clear)
     * [.execute()](#CompositeCall+execute) ⇒ <code>Promise.&lt;(void\|CompositeCallResponse)&gt;</code>
 
 <a name="new_CompositeCall_new"></a>
@@ -124,6 +125,12 @@
 | [referenceId] | <code>string</code> | <p><strong>Optional.</strong> The reference ID of the SObject subrequest.</p> |
 | [version] | <code>string</code> | <p><strong>Optional.</strong> The version of the Salesforce API to use. Must be less than or equal to the version defined for the Composite Call.</p> |
 
+<a name="CompositeCall+clear"></a>
+
+### compositeCall.clear()
+<p>Convenience method for internally clearing previous calls, limits, etc.</p>
+
+**Kind**: instance method of [<code>CompositeCall</code>](#CompositeCall)  
 <a name="CompositeCall+execute"></a>
 
 ### compositeCall.execute() ⇒ <code>Promise.&lt;(void\|CompositeCallResponse)&gt;</code>
