@@ -190,6 +190,15 @@ export class CompositeCall {
   }
 
   /**
+   * @description Convenience method for internally clearing previous calls, limits, etc.
+   */
+  clear (): void {
+    this.calls = []
+    this.limits.queryCount = 0
+    this.limits.totalCount = 0
+  }
+
+  /**
    * @description Convenience method for integrating with JSforce.
    * @returns {Promise<void | CompositeCallResponse>} - The result of executing the composite call, or undefined if no JSforce connection option was given.
    */
