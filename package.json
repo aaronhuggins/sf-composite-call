@@ -1,6 +1,6 @@
 {
   "name": "sf-composite-call",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Support for making Salesforce composite call requests with integration for JSforce.",
   "scripts": {
     "test": "gulp test",
