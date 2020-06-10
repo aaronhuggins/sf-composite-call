@@ -9,33 +9,55 @@ npm install --save sf-composite-call
 
 Then require it in your project:
 ```js
-const jsforce = require('jsforce')
 const escape = require('escape-html')
+const { Connection } = require('jsforce')
 const { CompositeCall } = require('sf-composite-call')
+const util = require('util')
+const getToken = util.promisify(
+  require('salesforce-jwt-bearer-token-flow').getToken
+)
 
-async main () {
-  // Order of operations matters when making composite calls.
+async function main () {
+  // Build an authenticated connection with Salesforce.
+  // Note: Example uses JWT, but your jsforce connection may vary depending on your use case.
+  const jwt = await getToken({
+    iss: 'Replace this with your Client Id from Salesforce',
+    sub: 'Replace this with your username from Salesforce',
+    aud: 'https://login.salesforce.com',
+    privateKey: 'Replace with your private pem certificate'
+  })
+
+  const conn = new Connection({
+    instanceUrl: jwt.instance_url,
+    accessToken: jwt.access_token
+  })
+
+  // Create the composite call.
+  // Note: Order of operations matter when making composite calls.
   const compositeCall = new CompositeCall({
     allOrNone: true,
-    jsforceConnection: conn // Assuming an authenticated instance of JSforce named 'conn'.
+    jsforceConnection: conn
   })
-  const account = compositeReq.addSObject('Account')
-  const accountNote = compositeReq.addSObject('ContentNote')
-  const accountNoteLink = compositeReq.addSObject('ContentDocumentLink')
+  const account = compositeCall.addSObject('Account')
+  const accountNote = compositeCall.addSObject('ContentNote')
+  const accountNoteLink = compositeCall.addSObject('ContentDocumentLink')
 
+  // Note: More fields may be required to create an account sObject in your Salesforce instance.
   account.create({
-    // More fields may be required to create an account sObject in your Salesforce instance.
     Name: 'Some account name'
   })
   accountNote.create({
     Title: 'Some note title',
     Content: Buffer.from(escape('Here\'s some note content'), 'utf8').toString('base64')
   })
+
+  // Note: Pay special attention to usage of references. In this example accountNote must be part of the same composite call otherwise an error is thrown.
   accountNoteLink.create({
     ContentDocumentId: `@{${accountNote.referenceId}.id}`,
     LinkedEntityId: `@{${account.referenceId}.id}`
   })
 
+  // Execute the composite call.
   const result = await compositeCall.execute()
 }
 
