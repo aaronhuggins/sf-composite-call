@@ -83,18 +83,29 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
   }
 
   /**
-   * @description Method to update an SObject record.
-   * @param {object} record - An object with valid fields for the SObject record.
-   * @param {string} record.Id - The ID of the SObject resource to update.
-   * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
-   * @returns {CompositeSubrequestBody} - A subrequest object.
-   */
-  update (record: any, httpHeaders?: any): CompositeSubrequestBody {
+  * @description Method to update an SObject record.
+  * @param {object} record - An object with valid fields for the SObject record.
+  * @param {string} [record.Id] - The ID of the SObject resource to update.
+  * @param {string} [externalId='Id'] - The field name to use as the Id of the object.
+  * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
+  * @returns {CompositeSubrequestBody} - A subrequest object.
+  */
+  update (record, externalId, httpHeaders) {
+    if (Helpers_1.isNullOrUndefined(externalId)){
+      externalId = 'Id'
+    }
+    if (typeof externalId === 'object' && !Helpers_1.isNullOrUndefined(httpHeaders)) {
+      httpHeaders = externalId
+      externalId = 'Id'
+    }
+    
     record = Object.assign({}, record)
-    const id = record.Id
-
-    delete record.Id
-
+    
+    const id = (externalId === 'Id' ? '' : externalId + '/') + encodeURIComponent(record[externalId])
+    
+    delete record.Id 
+    delete record[externalId]
+    
     return this.patch(record, id, httpHeaders)
   }
 

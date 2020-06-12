@@ -370,7 +370,7 @@
     * [.destroy(id, [httpHeaders])](#CompositeSubrequestSObject+destroy) ⇒ <code>CompositeSubrequestBody</code>
     * [.describe([httpHeaders])](#CompositeSubrequestSObject+describe) ⇒ <code>CompositeSubrequestBody</code>
     * [.retrieve(id, [httpHeaders])](#CompositeSubrequestSObject+retrieve) ⇒ <code>CompositeSubrequestBody</code>
-    * [.update(record, [httpHeaders])](#CompositeSubrequestSObject+update) ⇒ <code>CompositeSubrequestBody</code>
+    * [.update(record, [externalId], [httpHeaders])](#CompositeSubrequestSObject+update) ⇒ <code>CompositeSubrequestBody</code>
     * [.create(record, [httpHeaders])](#CompositeSubrequestSObject+create) ⇒ <code>CompositeSubrequestBody</code>
     * [.insert(record, [httpHeaders])](#CompositeSubrequestSObject+insert) ⇒ <code>CompositeSubrequestBody</code>
     * [.makeRequest(method, url, body, httpHeaders)](#CompositeSubrequest+makeRequest) ⇒ <code>CompositeSubrequestBody</code>
@@ -449,7 +449,7 @@
 
 <a name="CompositeSubrequestSObject+update"></a>
 
-### compositeSubrequestSObject.update(record, [httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
+### compositeSubrequestSObject.update(record, [externalId], [httpHeaders]) ⇒ <code>CompositeSubrequestBody</code>
 <p>Method to update an SObject record.</p>
 
 **Kind**: instance method of [<code>CompositeSubrequestSObject</code>](#CompositeSubrequestSObject)  
@@ -457,11 +457,12 @@
 <li>A subrequest object.</li>
 </ul>  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| record | <code>object</code> | <p>An object with valid fields for the SObject record.</p> |
-| record.Id | <code>string</code> | <p>The ID of the SObject resource to update.</p> |
-| [httpHeaders] | <code>object</code> | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| record | <code>object</code> |  | <p>An object with valid fields for the SObject record.</p> |
+| [record.Id] | <code>string</code> |  | <p>The ID of the SObject resource to update.</p> |
+| [externalId] | <code>string</code> | <code>&quot;&#x27;Id&#x27;&quot;</code> | <p>The field name to use as the Id of the object.</p> |
+| [httpHeaders] | <code>object</code> |  | <p><strong>Optional.</strong> Additional HTTP headers to include in the request.</p> |
 
 <a name="CompositeSubrequestSObject+create"></a>
 
