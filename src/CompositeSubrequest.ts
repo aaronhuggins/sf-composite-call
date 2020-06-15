@@ -9,7 +9,9 @@ import { isNullOrUndefined } from './Helpers'
 export class CompositeSubrequest {
   constructor (referenceId?: string, version?: string) {
     this.version = this.versionRX.test(version) ? version : 'v48.0'
-    this.referenceId = isNullOrUndefined(referenceId) ? uuidv4().replace(/-/gu, '') : referenceId
+    this.referenceId = isNullOrUndefined(referenceId)
+      ? uuidv4().replace(/-/gu, '')
+      : referenceId
   }
 
   version: string
@@ -49,7 +51,12 @@ export class CompositeSubrequest {
    * @param {object} httpHeaders - **Optional.** Request headers and their values to include with the subrequest.
    * @returns {CompositeSubrequestBody} - A subrequest object.
    */
-  makeRequest (method?: CompositeSubrequestMethods, url?: string, body?: any, httpHeaders?: any): CompositeSubrequestBody {
+  makeRequest (
+    method?: CompositeSubrequestMethods,
+    url?: string,
+    body?: any,
+    httpHeaders?: any
+  ): CompositeSubrequestBody {
     method = isNullOrUndefined(method) ? 'GET' : method
     url = isNullOrUndefined(url) ? this.url() : url
 

@@ -1,5 +1,8 @@
 import { isNullOrUndefined } from './Helpers'
-import { CompositeSubrequest, CompositeSubrequestBody } from './CompositeSubrequest'
+import {
+  CompositeSubrequest,
+  CompositeSubrequestBody
+} from './CompositeSubrequest'
 
 /**
  * @description Class for SOQL query and queryAll Composite Subrequests.
@@ -44,8 +47,8 @@ export class CompositeSubrequestQuery extends CompositeSubrequest {
       isNullOrUndefined(queryId)
         ? this.url() + `?q=${soql}`
         : queryId.trim().toLowerCase() === 'explain'
-          ? this.url() + `?explain=${soql}`
-          : queryId,
+        ? this.url() + `?explain=${soql}`
+        : queryId,
       undefined,
       httpHeaders
     )
@@ -81,7 +84,10 @@ export class CompositeSubrequestQuery extends CompositeSubrequest {
    * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
    * @returns {CompositeSubrequestBody} - A subrequest object.
    */
-  nextRecords (nextRecordsUrl: string, httpHeaders?: any): CompositeSubrequestBody {
+  nextRecords (
+    nextRecordsUrl: string,
+    httpHeaders?: any
+  ): CompositeSubrequestBody {
     this.verb = 'query'
 
     return this.get(nextRecordsUrl, httpHeaders)
@@ -93,7 +99,10 @@ export class CompositeSubrequestQuery extends CompositeSubrequest {
    * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
    * @returns {CompositeSubrequestBody} - A subrequest object.
    */
-  nextRecordsAll (nextRecordsUrl: string, httpHeaders?: any): CompositeSubrequestBody {
+  nextRecordsAll (
+    nextRecordsUrl: string,
+    httpHeaders?: any
+  ): CompositeSubrequestBody {
     this.verb = 'queryAll'
 
     return this.get(nextRecordsUrl, httpHeaders)

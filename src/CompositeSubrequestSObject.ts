@@ -1,5 +1,8 @@
 import { isNullOrUndefined } from './Helpers'
-import { CompositeSubrequest, CompositeSubrequestBody } from './CompositeSubrequest'
+import {
+  CompositeSubrequest,
+  CompositeSubrequestBody
+} from './CompositeSubrequest'
 
 /**
  * @description Class for SObject Composite Subrequests.
@@ -20,7 +23,11 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
     return super.url() + `/sobjects/${this.sobject}`
   }
 
-  delete (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestBody {
+  delete (
+    body?: any,
+    operation?: string,
+    httpHeaders?: any
+  ): CompositeSubrequestBody {
     this.obj = this.makeRequest(
       'DELETE',
       !isNullOrUndefined(operation) ? this.url() + '/' + operation : this.url(),
@@ -41,7 +48,11 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
     return this.delete(undefined, id, httpHeaders)
   }
 
-  get (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestBody {
+  get (
+    body?: any,
+    operation?: string,
+    httpHeaders?: any
+  ): CompositeSubrequestBody {
     this.obj = this.makeRequest(
       null,
       !isNullOrUndefined(operation) ? this.url() + '/' + operation : this.url(),
@@ -71,7 +82,11 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
     return this.get(undefined, id, httpHeaders)
   }
 
-  patch (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestBody {
+  patch (
+    body?: any,
+    operation?: string,
+    httpHeaders?: any
+  ): CompositeSubrequestBody {
     this.obj = this.makeRequest(
       'PATCH',
       !isNullOrUndefined(operation) ? this.url() + '/' + operation : this.url(),
@@ -83,33 +98,43 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
   }
 
   /**
-  * @description Method to update an SObject record.
-  * @param {object} record - An object with valid fields for the SObject record.
-  * @param {string} [record.Id] - The ID of the SObject resource to update.
-  * @param {string} [externalId='Id'] - The field name to use as the Id of the object.
-  * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
-  * @returns {CompositeSubrequestBody} - A subrequest object.
-  */
-  update (record, externalId, httpHeaders) {
-    if (Helpers_1.isNullOrUndefined(externalId)){
+   * @description Method to update an SObject record.
+   * @param {object} record - An object with valid fields for the SObject record.
+   * @param {string} [record.Id] - The ID of the SObject resource to update.
+   * @param {string} [externalId='Id'] - The field name to use as the Id of the object.
+   * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
+   * @returns {CompositeSubrequestBody} - A subrequest object.
+   */
+  update (
+    record: any,
+    externalId: string,
+    httpHeaders: any
+  ): CompositeSubrequestBody {
+    if (isNullOrUndefined(externalId)) {
       externalId = 'Id'
     }
-    if (typeof externalId === 'object' && !Helpers_1.isNullOrUndefined(httpHeaders)) {
+    if (typeof externalId === 'object' && !isNullOrUndefined(httpHeaders)) {
       httpHeaders = externalId
       externalId = 'Id'
     }
-    
+
     record = Object.assign({}, record)
-    
-    const id = (externalId === 'Id' ? '' : externalId + '/') + encodeURIComponent(record[externalId])
-    
-    delete record.Id 
+
+    const id =
+      (externalId === 'Id' ? '' : (externalId as string) + '/') +
+      encodeURIComponent(record[externalId])
+
+    delete record.Id
     delete record[externalId]
-    
+
     return this.patch(record, id, httpHeaders)
   }
 
-  post (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestBody {
+  post (
+    body?: any,
+    operation?: string,
+    httpHeaders?: any
+  ): CompositeSubrequestBody {
     this.obj = this.makeRequest(
       'POST',
       !isNullOrUndefined(operation) ? this.url() + '/' + operation : this.url(),
@@ -140,7 +165,11 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
     return this.create(record, httpHeaders)
   }
 
-  put (body?: any, operation?: string, httpHeaders?: any): CompositeSubrequestBody {
+  put (
+    body?: any,
+    operation?: string,
+    httpHeaders?: any
+  ): CompositeSubrequestBody {
     this.obj = this.makeRequest(
       'PUT',
       !isNullOrUndefined(operation) ? this.url() + '/' + operation : this.url(),

@@ -33,7 +33,10 @@ interface CompositeCallResponseResult {
 // Taken from https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/responses_composite.htm
 interface CompositeCallResponse {
   compositeResponse: Array<{
-    body?: CompositeCallResponseResult | CompositeCallResponseResult[] | CompositeCallResponseError[]
+    body?:
+      | CompositeCallResponseResult
+      | CompositeCallResponseResult[]
+      | CompositeCallResponseError[]
     httpHeaders: {
       [header: string]: string
     }
@@ -55,7 +58,9 @@ interface CompositeCallResponse {
  */
 export class CompositeCall {
   constructor (options: CompositeCallOptions) {
-    this.version = this.versionRX.test(options.version) ? options.version : 'v48.0'
+    this.version = this.versionRX.test(options.version)
+      ? options.version
+      : 'v48.0'
     this.calls = []
     this.options = {
       allOrNone: options.allOrNone,
@@ -131,7 +136,11 @@ export class CompositeCall {
    * @throws {Error} Query limit met. No more queries may be added.
    * @throws {Error} Total request limit met. No more requests may be added.
    */
-  addQuery (query: string, referenceId?: string, version?: string): CompositeSubrequestQuery {
+  addQuery (
+    query: string,
+    referenceId?: string,
+    version?: string
+  ): CompositeSubrequestQuery {
     if (this.queryLimitMet) {
       throw new Error('Query limit met. No more queries may be added.')
     }
@@ -156,12 +165,20 @@ export class CompositeCall {
    * @returns {CompositeSubrequestSObject} - An instance of `CompositeSubrequestSObject`.
    * @throws {Error} Total request limit met. No more requests may be added.
    */
-  addSObject (sobject: string, referenceId?: string, version?: string): CompositeSubrequestSObject {
+  addSObject (
+    sobject: string,
+    referenceId?: string,
+    version?: string
+  ): CompositeSubrequestSObject {
     if (this.totalLimitMet) {
       throw new Error('Total request limit met. No more requests may be added.')
     }
     version = isNullOrUndefined(version) ? this.version : version
-    const newCall = new CompositeSubrequestSObject(sobject, referenceId, version)
+    const newCall = new CompositeSubrequestSObject(
+      sobject,
+      referenceId,
+      version
+    )
 
     this.calls.push(newCall)
     this.limits.totalCount += 1
@@ -176,12 +193,18 @@ export class CompositeCall {
    * @returns {CompositeSubrequestSObjectCollection} - An instance of `CompositeSubrequestSObjectCollection`.
    * @throws {Error} Total request limit met. No more requests may be added.
    */
-  addSObjectCollection (referenceId?: string, version?: string): CompositeSubrequestSObjectCollection {
+  addSObjectCollection (
+    referenceId?: string,
+    version?: string
+  ): CompositeSubrequestSObjectCollection {
     if (this.totalLimitMet) {
       throw new Error('Total request limit met. No more requests may be added.')
     }
     version = isNullOrUndefined(version) ? this.version : version
-    const newCall = new CompositeSubrequestSObjectCollection(referenceId, version)
+    const newCall = new CompositeSubrequestSObjectCollection(
+      referenceId,
+      version
+    )
 
     this.calls.push(newCall)
     this.limits.totalCount += 1
@@ -202,9 +225,12 @@ export class CompositeCall {
    * @description Convenience method for integrating with JSforce.
    * @returns {Promise<void | CompositeCallResponse>} - The result of executing the composite call, or undefined if no JSforce connection option was given.
    */
-  async execute (): Promise<void | CompositeCallResponse> { // eslint-disable-line @typescript-eslint/require-await
+  async execute (): Promise<void | CompositeCallResponse> {
+    // eslint-disable-line @typescript-eslint/require-await
     if (isNullOrUndefined(this.connection)) {
-      return console.warn('No JSForce Connection object provided. Request cannot be executed.')
+      return console.warn(
+        'No JSForce Connection object provided. Request cannot be executed.'
+      )
     } else {
       return this.connection.requestPost(this.url, this.request)
     }
