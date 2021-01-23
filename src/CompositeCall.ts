@@ -30,19 +30,32 @@ interface CompositeCallResponseResult {
   errors: any[]
 }
 
+export interface CompositeResponse200<T = CompositeCallResponseResult> {
+  body: T
+  httpHeaders: {
+    [header: string]: string
+  }
+  httpStatusCode: 200
+  referenceId: string
+}
+
+export interface CompositeResponseAny {
+  body?:
+    | CompositeCallResponseResult
+    | CompositeCallResponseResult[]
+    | CompositeCallResponseError[]
+  httpHeaders: {
+    [header: string]: string
+  }
+  httpStatusCode: 200
+  referenceId: string
+}
+
+export type CompositeResponse<T = any> = CompositeResponse200<T> | CompositeResponseAny
+
 // Taken from https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/responses_composite.htm
-interface CompositeCallResponse {
-  compositeResponse: Array<{
-    body?:
-      | CompositeCallResponseResult
-      | CompositeCallResponseResult[]
-      | CompositeCallResponseError[]
-    httpHeaders: {
-      [header: string]: string
-    }
-    httpStatusCode: number
-    referenceId: string
-  }>
+export interface CompositeCallResponse<T = any> {
+  compositeResponse: CompositeResponse<T>[]
 }
 
 /**
@@ -223,16 +236,19 @@ export class CompositeCall {
 
   /**
    * @description Convenience method for integrating with JSforce.
-   * @returns {Promise<void | CompositeCallResponse>} - The result of executing the composite call, or undefined if no JSforce connection option was given.
+   * @param {any} [connection] - Optionally pass a JSforce connection instance; used if not defined as part this class instance options.
+   * @returns {Promise<CompositeCallResponse>} - The result of executing the composite call, or undefined if no JSforce connection was given.
    */
-  async execute (): Promise<void | CompositeCallResponse> {
+  async execute<T = any> (connection?: any): Promise<CompositeCallResponse<T>> {
     // eslint-disable-line @typescript-eslint/require-await
-    if (isNullOrUndefined(this.connection)) {
-      return console.warn(
-        'No JSForce Connection object provided. Request cannot be executed.'
-      )
-    } else {
+    if (!isNullOrUndefined(this.connection)) {
       return this.connection.requestPost(this.url, this.request)
+    } else if (!isNullOrUndefined(connection)) {
+      return connection.requestPost(this.url, this.request)
+    } else {
+      console.warn('No JSForce Connection object provided. Request cannot be executed.')
+
+      return
     }
   }
 }
