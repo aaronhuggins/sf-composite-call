@@ -4,6 +4,11 @@ import {
   CompositeSubrequestBody
 } from './CompositeSubrequest'
 
+export interface ExternalIdReference {
+  externalId: string
+  sobject?: string
+}
+
 /**
  * @description Class for SObject Collection Composite Subrequests.
  * @augments CompositeSubrequest
@@ -96,7 +101,7 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
 
   patch (
     records: any[],
-    sobject?: string,
+    sobjectOrExternalIdRef?: string | ExternalIdReference,
     allOrNone?: boolean,
     httpHeaders?: any
   ): CompositeSubrequestBody {
@@ -105,31 +110,63 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
         `Too many records specified for PATCH request; limit is 200, ${records.length} were provided.`
       )
     }
+    const sobjects: string[] = records
+      .map((val: any) =>
+        !isNullOrUndefined(val.attributes)
+          ? (val.attributes.type as string)
+          : ''
+      )
+      .filter((val: string) => val !== '')
+    const hasSobjectType = sobjects.length === records.length
+
+    let apiOperation = ''
 
     records = records.map(_record => Object.assign({}, _record))
 
-    if (isNullOrUndefined(sobject)) {
-      const sobjects: string[] = records
-        .map((val: any) =>
-          !isNullOrUndefined(val.attributes)
-            ? (val.attributes.type as string)
-            : ''
-        )
-        .filter((val: string) => val !== '')
-
-      if (sobjects.length !== records.length) {
-        throw new Error('No SObject type provided for PATCH request.')
-      }
-    } else {
+    if (isNullOrUndefined(sobjectOrExternalIdRef) && !hasSobjectType) {
+      throw new Error('No SObject type provided for PATCH request.')
+    } else if (typeof sobjectOrExternalIdRef === 'string') {
       records.forEach((val: any) => {
         if (isNullOrUndefined(val.attributes)) {
           val.attributes = {}
         }
 
         if (isNullOrUndefined(val.attributes.type)) {
-          val.attributes.type = sobject
+          val.attributes.type = sobjectOrExternalIdRef
         }
       })
+    } else {
+      const { externalId, sobject } = sobjectOrExternalIdRef
+      let apiSobject = ''
+
+      if (isNullOrUndefined(sobject)) {
+        if (hasSobjectType) {
+          const { attributes = {} } = records[0]
+          const { type = '' } = attributes
+  
+          apiSobject = type
+        } else {
+          throw new Error('No SObject type provided for PATCH request.')
+        }
+      } else {
+        apiSobject = sobject
+
+        records.forEach((val: any) => {
+          if (isNullOrUndefined(val.attributes)) {
+            val.attributes = {}
+          }
+  
+          if (isNullOrUndefined(val.attributes.type)) {
+            val.attributes.type = sobject
+          }
+        })
+      }
+
+      if (!isNullOrUndefined(externalId)) {
+        apiOperation = apiSobject + '/' + externalId
+      } else {
+        throw new Error('No externalId provided for PATCH request.')
+      }
     }
 
     const body = {
@@ -137,7 +174,12 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
       records
     }
 
-    this.obj = this.makeRequest('PATCH', this.url(), body, httpHeaders)
+    this.obj = this.makeRequest(
+      'PATCH',
+      apiOperation === '' ? this.url() : this.url() + '/' + apiOperation,
+      body,
+      httpHeaders
+    )
 
     return this.obj
   }
@@ -145,7 +187,7 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
   /**
    * @description Method to update a collection of SObjects.
    * @param {object | object[]} record - The SObject records to update, limit is 200; ensure that all records have an Id field and object `attributes` with field `type` containing the SOBject name of the record.
-   * @param {string} [sobject] - **Optional, if all records have a type.** A SObject name; used to add type information to any records missing `attributes.type`.
+   * @param {string | ExternalIdReference} [sobjectOrExternalIdRef] - **Optional, if all records have a type; required for external ID upserts.** A SObject name; used to add type information to any records missing `attributes.type`.
    * @param {boolean} [allOrNone] - **Optional.** Indicates whether to roll back the entire request when the deletion of any object fails (true) or to continue with the independent deletion of other objects in the request. The default is false.
    * @param {object} [httpHeaders] - **Optional.** Additional HTTP headers to include in the request.
    * @returns {CompositeSubrequestBody} - A subrequest object.
@@ -154,13 +196,13 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
    */
   update (
     record: any | any[],
-    sobject?: string,
+    sobjectOrExternalIdRef?: string | ExternalIdReference,
     allOrNone?: boolean,
     httpHeaders?: any
   ): CompositeSubrequestBody {
     const records: any[] = Array.isArray(record) ? record : [record]
 
-    return this.patch(records, sobject, allOrNone, httpHeaders)
+    return this.patch(records, sobjectOrExternalIdRef, allOrNone, httpHeaders)
   }
 
   post (
