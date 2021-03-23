@@ -89,7 +89,7 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
   ): CompositeSubrequestBody {
     this.obj = this.makeRequest(
       'PATCH',
-      !isNullOrUndefined(operation) ? this.url() + '/' + operation : this.url(),
+      isNullOrUndefined(operation) ? this.url() : this.url() + '/' + operation,
       body,
       httpHeaders
     )
