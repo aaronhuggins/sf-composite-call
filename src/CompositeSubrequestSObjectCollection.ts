@@ -5,7 +5,9 @@ import {
 } from './CompositeSubrequest'
 
 export interface ExternalIdReference {
+  /* The field name to use as the external Id of the object. */
   externalId: string
+  /* Name of the sobject(s) to update. */
   sobject?: string
 }
 
