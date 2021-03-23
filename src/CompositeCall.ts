@@ -41,9 +41,9 @@ export interface CompositeResponse200<T = CompositeCallResponseResult> {
 
 export interface CompositeResponseAny {
   body?:
-    | CompositeCallResponseResult
-    | CompositeCallResponseResult[]
-    | CompositeCallResponseError[]
+  | CompositeCallResponseResult
+  | CompositeCallResponseResult[]
+  | CompositeCallResponseError[]
   httpHeaders: {
     [header: string]: string
   }
@@ -55,7 +55,7 @@ export type CompositeResponse<T = any> = CompositeResponse200<T> | CompositeResp
 
 // Taken from https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/responses_composite.htm
 export interface CompositeCallResponse<T = any> {
-  compositeResponse: CompositeResponse<T>[]
+  compositeResponse: Array<CompositeResponse<T>>
 }
 
 /**
@@ -71,13 +71,13 @@ export interface CompositeCallResponse<T = any> {
  */
 export class CompositeCall {
   constructor (options: CompositeCallOptions) {
-    this.version = this.versionRX.test(options.version)
-      ? options.version
+    this.version = this.versionRX.test(options.version as string)
+      ? options.version as string
       : 'v48.0'
     this.calls = []
     this.options = {
-      allOrNone: options.allOrNone,
-      collateSubrequests: options.collateSubrequests
+      allOrNone: options.allOrNone as boolean,
+      collateSubrequests: options.collateSubrequests as boolean
     }
     this.connection = options.jsforceConnection
     this.limits = {
@@ -245,10 +245,8 @@ export class CompositeCall {
       return this.connection.requestPost(this.url, this.request)
     } else if (!isNullOrUndefined(connection)) {
       return connection.requestPost(this.url, this.request)
-    } else {
-      console.warn('No JSForce Connection object provided. Request cannot be executed.')
-
-      return
     }
+
+    console.warn('No JSForce Connection object provided. Request cannot be executed.')
   }
 }

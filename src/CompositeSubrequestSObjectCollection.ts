@@ -43,7 +43,7 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
 
     this.obj = this.makeRequest(
       'DELETE',
-      this.url() + `?ids=${ids.join(',')}&allOrNone=${allOrNone}`,
+      this.url() + `?ids=${ids.join(',')}&allOrNone=${allOrNone ? 'true' : 'false'}`,
       undefined,
       httpHeaders
     )
@@ -91,7 +91,7 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
     }
 
     this.obj = this.makeRequest(
-      null,
+      null as unknown as any,
       this.url() +
         `/${sobject}?ids=${ids.join(',')}&fields=${fields.join(',')}`,
       undefined,
@@ -125,8 +125,8 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
 
     records = records.map(_record => Object.assign({}, _record))
 
-    if (isNullOrUndefined(sobjectOrExternalIdRef) && !hasSobjectType) {
-      throw new Error('No SObject type provided for PATCH request.')
+    if (isNullOrUndefined(sobjectOrExternalIdRef)) {
+      if (!hasSobjectType) throw new Error('No SObject type provided for PATCH request.')
     } else if (typeof sobjectOrExternalIdRef === 'string') {
       records.forEach((val: any) => {
         if (isNullOrUndefined(val.attributes)) {
@@ -145,7 +145,7 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
         if (hasSobjectType) {
           const { attributes = {} } = records[0]
           const { type = '' } = attributes
-  
+
           apiSobject = type
         } else {
           throw new Error('No SObject type provided for PATCH request.')
@@ -157,17 +157,17 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
           if (isNullOrUndefined(val.attributes)) {
             val.attributes = {}
           }
-  
+
           if (isNullOrUndefined(val.attributes.type)) {
             val.attributes.type = sobject
           }
         })
       }
 
-      if (!isNullOrUndefined(externalId)) {
-        apiOperation = apiSobject + '/' + externalId
-      } else {
+      if (isNullOrUndefined(externalId)) {
         throw new Error('No externalId provided for PATCH request.')
+      } else {
+        apiOperation = apiSobject + '/' + externalId
       }
     }
 
@@ -214,7 +214,7 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
   ): CompositeSubrequestBody {
     this.obj = this.makeRequest(
       'POST',
-      !isNullOrUndefined(operation) ? this.url() + '/' + operation : this.url(),
+      isNullOrUndefined(operation) ? this.url() : `${this.url()}/${operation}`,
       body,
       httpHeaders
     )
@@ -308,7 +308,7 @@ export class CompositeSubrequestSObjectCollection extends CompositeSubrequest {
       records
     }
 
-    return this.post(body, null, httpHeaders)
+    return this.post(body, null as unknown as any, httpHeaders)
   }
 
   /**

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-dynamic-delete */
 import { isNullOrUndefined } from './Helpers'
 import {
   CompositeSubrequest,
@@ -17,7 +18,7 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
     this.sobject = sobject
   }
 
-  sobject: any
+  sobject: string
 
   url (): string {
     return super.url() + `/sobjects/${this.sobject}`
@@ -54,7 +55,7 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
     httpHeaders?: any
   ): CompositeSubrequestBody {
     this.obj = this.makeRequest(
-      null,
+      null as unknown as any,
       !isNullOrUndefined(operation) ? this.url() + '/' + operation : this.url(),
       body,
       httpHeaders
@@ -121,7 +122,7 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
     record = Object.assign({}, record)
 
     const id =
-      (externalId === 'Id' ? '' : (externalId as string) + '/') +
+      (externalId === 'Id' ? '' : externalId + '/') +
       encodeURIComponent(record[externalId])
 
     delete record.Id
@@ -152,7 +153,7 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
    * @returns {CompositeSubrequestBody} - A subrequest object.
    */
   create (record: any, httpHeaders?: any): CompositeSubrequestBody {
-    return this.post(record, null, httpHeaders)
+    return this.post(record, null as unknown as any, httpHeaders)
   }
 
   /**
@@ -172,7 +173,7 @@ export class CompositeSubrequestSObject extends CompositeSubrequest {
   ): CompositeSubrequestBody {
     this.obj = this.makeRequest(
       'PUT',
-      !isNullOrUndefined(operation) ? this.url() + '/' + operation : this.url(),
+      isNullOrUndefined(operation) ? this.url() : `${this.url()}/${operation}`,
       body,
       httpHeaders
     )

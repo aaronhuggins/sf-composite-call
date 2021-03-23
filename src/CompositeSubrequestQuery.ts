@@ -43,12 +43,12 @@ export class CompositeSubrequestQuery extends CompositeSubrequest {
     const soql = this.soql.replace(/\s/gu, '+')
 
     this.obj = this.makeRequest(
-      null,
+      null as unknown as any,
       isNullOrUndefined(queryId)
         ? this.url() + `?q=${soql}`
         : queryId.trim().toLowerCase() === 'explain'
-        ? this.url() + `?explain=${soql}`
-        : queryId,
+          ? this.url() + `?explain=${soql}`
+          : queryId,
       undefined,
       httpHeaders
     )
@@ -116,7 +116,7 @@ export class CompositeSubrequestQuery extends CompositeSubrequest {
   query (httpHeaders?: any): CompositeSubrequestBody {
     this.verb = 'query'
 
-    return this.get(null, httpHeaders)
+    return this.get(null as unknown as any, httpHeaders)
   }
 
   /**
@@ -127,6 +127,6 @@ export class CompositeSubrequestQuery extends CompositeSubrequest {
   queryAll (httpHeaders?: any): CompositeSubrequestBody {
     this.verb = 'queryAll'
 
-    return this.get(null, httpHeaders)
+    return this.get(null as unknown as any, httpHeaders)
   }
 }
