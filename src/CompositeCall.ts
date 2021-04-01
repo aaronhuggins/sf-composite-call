@@ -4,11 +4,17 @@ import { CompositeSubrequestSObject } from './CompositeSubrequestSObject'
 import { CompositeSubrequestSObjectCollection } from './CompositeSubrequestSObjectCollection'
 import { CompositeSubrequestBody } from './CompositeSubrequest'
 
+declare class JSforceLike {
+  [key: string]: any
+  requestPost (url: any, body: any): Promise<any>
+  requestPost (url: any, body: any, fnCallback: (err: Error, response: any) => void): void
+}
+
 interface CompositeCallOptions {
   version?: string
   allOrNone?: boolean
   collateSubrequests?: boolean
-  jsforceConnection?: any
+  jsforceConnection?: JSforceLike
 }
 
 // Taken from https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/requests_composite.htm
@@ -90,7 +96,7 @@ export class CompositeCall {
 
   version: string
   calls: any[]
-  connection: any
+  connection: JSforceLike
 
   options: {
     allOrNone: boolean
@@ -239,13 +245,12 @@ export class CompositeCall {
    * @param {any} [connection] - Optionally pass a JSforce connection instance; used if not defined as part this class instance options.
    * @returns {Promise<CompositeCallResponse>} - The result of executing the composite call, or undefined if no JSforce connection was given.
    */
-  async execute<T = any> (connection?: any): Promise<CompositeCallResponse<T>> {
-    // eslint-disable-line @typescript-eslint/require-await
-    if (!isNullOrUndefined(this.connection)) {
-      return this.connection.requestPost(this.url, this.request)
-    } else if (!isNullOrUndefined(connection)) {
-      return connection.requestPost(this.url, this.request)
-    }
+  async execute<T = any> (connection?: JSforceLike): Promise<CompositeCallResponse<T>> {
+    if (!isNullOrUndefined(connection)) {
+      return await connection.requestPost(this.url, this.request)
+    } else if (!isNullOrUndefined(this.connection)) {
+      return await this.connection.requestPost(this.url, this.request)
+    } 
 
     console.warn('No JSForce Connection object provided. Request cannot be executed.')
   }
